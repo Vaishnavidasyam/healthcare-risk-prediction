@@ -1,0 +1,521 @@
+/* frontend/src/components/HealthCard.css */
+
+.health-card {
+  position: relative;
+
+  background: rgba(10, 20, 38, 0.94);
+
+  backdrop-filter: blur(22px);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 30px;
+
+  padding: 28px;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    background 0.35s ease;
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 340px;
+}
+
+/* ======================================================
+   GLOW EFFECT
+====================================================== */
+
+.health-card::after {
+  content: "";
+
+  position: absolute;
+
+  top: -100px;
+  right: -100px;
+
+  width: 220px;
+  height: 220px;
+
+  background: radial-gradient(
+    circle,
+    rgba(14, 165, 233, 0.12),
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+
+/* ======================================================
+   HOVER EFFECT
+====================================================== */
+
+.health-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.34),
+    0 12px 32px rgba(14, 165, 233, 0.14);
+}
+
+/* ======================================================
+   STATUS TOP BORDER
+====================================================== */
+
+.health-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+}
+
+.health-card.high::before {
+  background: linear-gradient(90deg, #ef4444, #fb7185);
+}
+
+.health-card.medium::before {
+  background: linear-gradient(90deg, #f59e0b, #facc15);
+}
+
+.health-card.low::before {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.health-card.unknown::before {
+  background: linear-gradient(90deg, #64748b, #94a3b8);
+}
+
+/* ======================================================
+   HEADER
+====================================================== */
+
+.health-card-header {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  margin-bottom: 26px;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+/* ======================================================
+   ICON
+====================================================== */
+
+.health-card-icon {
+  width: 62px;
+  height: 62px;
+
+  border-radius: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 24px;
+
+  color: white;
+
+  flex-shrink: 0;
+
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* STATUS ICON COLORS */
+
+.health-card.high .health-card-icon {
+  background: linear-gradient(135deg, #ef4444, #fb7185);
+}
+
+.health-card.medium .health-card-icon {
+  background: linear-gradient(135deg, #f59e0b, #facc15);
+}
+
+.health-card.low .health-card-icon {
+  background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+.health-card.unknown .health-card-icon {
+  background: linear-gradient(135deg, #475569, #64748b);
+}
+
+/* ======================================================
+   TITLE SECTION
+====================================================== */
+
+.health-card-title-section {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.health-card-title-section h4 {
+  font-size: 24px;
+
+  font-weight: 800;
+
+  color: #f8fafc;
+
+  letter-spacing: -0.5px;
+}
+
+/* ======================================================
+   STATUS BADGE
+====================================================== */
+
+.health-status {
+  width: fit-content;
+
+  padding: 7px 14px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+}
+
+.health-status.high {
+  background: rgba(239, 68, 68, 0.14);
+
+  color: #fca5a5;
+
+  border: 1px solid rgba(239, 68, 68, 0.18);
+}
+
+.health-status.medium {
+  background: rgba(245, 158, 11, 0.14);
+
+  color: #fde68a;
+
+  border: 1px solid rgba(245, 158, 11, 0.16);
+}
+
+.health-status.low {
+  background: rgba(16, 185, 129, 0.14);
+
+  color: #86efac;
+
+  border: 1px solid rgba(16, 185, 129, 0.16);
+}
+
+.health-status.unknown {
+  background: rgba(148, 163, 184, 0.14);
+
+  color: #cbd5e1;
+
+  border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+/* ======================================================
+   MAIN SECTION
+====================================================== */
+
+.health-card-main {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 22px;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+/* ======================================================
+   RISK NUMBER
+====================================================== */
+
+.health-risk-number {
+  font-size: 64px;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing: -2px;
+
+  color: #ffffff;
+}
+
+/* ======================================================
+   TREND
+====================================================== */
+
+.health-risk-trend {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 12px 16px;
+
+  border-radius: 16px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  backdrop-filter: blur(12px);
+}
+
+.health-card.high .health-risk-trend {
+  background: rgba(239, 68, 68, 0.12);
+
+  color: #fca5a5;
+}
+
+.health-card.medium .health-risk-trend {
+  background: rgba(245, 158, 11, 0.12);
+
+  color: #fde68a;
+}
+
+.health-card.low .health-risk-trend {
+  background: rgba(16, 185, 129, 0.12);
+
+  color: #86efac;
+}
+
+.health-card.unknown .health-risk-trend {
+  background: rgba(148, 163, 184, 0.12);
+
+  color: #cbd5e1;
+}
+
+/* ======================================================
+   BODY
+====================================================== */
+
+.health-card-body {
+  margin-bottom: 26px;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.health-card-body p {
+  color: #94a3b8;
+
+  font-size: 15px;
+
+  line-height: 1.9;
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.health-card-footer {
+  margin-top: auto;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+/* ======================================================
+   PROGRESS BAR
+====================================================== */
+
+.health-progress {
+  width: 100%;
+
+  height: 12px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  border-radius: 999px;
+
+  overflow: hidden;
+}
+
+.health-progress-fill {
+  height: 100%;
+
+  border-radius: 999px;
+
+  transition: width 0.6s ease;
+}
+
+/* PROGRESS COLORS */
+
+.health-progress-fill.high {
+  background: linear-gradient(90deg, #ef4444, #fb7185);
+}
+
+.health-progress-fill.medium {
+  background: linear-gradient(90deg, #f59e0b, #facc15);
+}
+
+.health-progress-fill.low {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.health-progress-fill.unknown {
+  background: linear-gradient(90deg, #64748b, #94a3b8);
+}
+
+/* ======================================================
+   FOOTER LABELS
+====================================================== */
+
+.health-footer-labels {
+  margin-top: 12px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.health-footer-labels span {
+  font-size: 13px;
+
+  color: #94a3b8;
+
+  font-weight: 500;
+}
+
+/* ======================================================
+   LIGHT THEME
+====================================================== */
+
+body.light-theme .health-card {
+  background: rgba(255, 255, 255, 0.88);
+
+  border: 1px solid rgba(15, 23, 42, 0.06);
+
+  box-shadow:
+    0 14px 32px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+body.light-theme .health-card:hover {
+  box-shadow:
+    0 20px 45px rgba(15, 23, 42, 0.12),
+    0 10px 26px rgba(14, 165, 233, 0.08);
+}
+
+body.light-theme .health-card-title-section h4 {
+  color: #0f172a;
+}
+
+body.light-theme .health-risk-number {
+  color: #020617;
+}
+
+body.light-theme .health-card-body p {
+  color: #475569;
+}
+
+body.light-theme .health-footer-labels span {
+  color: #64748b;
+}
+
+body.light-theme .health-progress {
+  background: rgba(15, 23, 42, 0.08);
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 992px) {
+  .health-risk-number {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .health-card {
+    padding: 22px;
+
+    border-radius: 24px;
+  }
+
+  .health-card-main {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .health-risk-number {
+    font-size: 48px;
+  }
+
+  .health-card-header {
+    gap: 16px;
+  }
+
+  .health-card-icon {
+    width: 56px;
+    height: 56px;
+
+    font-size: 22px;
+  }
+
+  .health-card-title-section h4 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .health-card {
+    padding: 18px;
+
+    border-radius: 22px;
+  }
+
+  .health-risk-number {
+    font-size: 40px;
+  }
+
+  .health-card-title-section h4 {
+    font-size: 18px;
+  }
+
+  .health-risk-trend {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .health-card-body p {
+    font-size: 14px;
+  }
+}

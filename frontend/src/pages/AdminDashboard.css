@@ -1,0 +1,525 @@
+/* frontend/src/pages/AdminDashboard.css */
+
+.admin-dashboard {
+  min-height: 100vh;
+
+  padding: 34px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(14, 165, 233, 0.08),
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(6, 182, 212, 0.06),
+      transparent 20%
+    ),
+    #020617;
+}
+
+/* ======================================================
+   HEADER
+====================================================== */
+
+.admin-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 34px;
+}
+
+.admin-header h1 {
+  font-size: 42px;
+  font-weight: 800;
+
+  color: #f8fafc;
+
+  margin-bottom: 12px;
+}
+
+.admin-header p {
+  max-width: 720px;
+
+  color: #94a3b8;
+
+  line-height: 1.8;
+
+  font-size: 15px;
+}
+
+/* ======================================================
+   BADGE
+====================================================== */
+
+.admin-badge {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  background: rgba(14, 165, 233, 0.12);
+
+  border: 1px solid rgba(14, 165, 233, 0.22);
+
+  color: #38bdf8;
+
+  padding: 14px 18px;
+
+  border-radius: 16px;
+
+  font-weight: 700;
+}
+
+/* ======================================================
+   STATS
+====================================================== */
+
+.admin-stats {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+  gap: 24px;
+
+  margin-bottom: 32px;
+}
+
+/* ======================================================
+   GRID
+====================================================== */
+
+.admin-grid {
+  display: grid;
+
+  grid-template-columns: 2fr 1fr;
+
+  gap: 24px;
+
+  margin-bottom: 34px;
+}
+
+.admin-grid-left,
+.admin-grid-right {
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+/* ======================================================
+   ANALYTICS
+====================================================== */
+
+.analytics-placeholder {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.analytics-row {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  background: rgba(255, 255, 255, 0.03);
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  border-radius: 18px;
+
+  padding: 18px;
+}
+
+.analytics-icon {
+  width: 52px;
+  height: 52px;
+
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  font-size: 20px;
+}
+
+.analytics-icon.heart {
+  background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.analytics-icon.diabetes {
+  background: linear-gradient(135deg, #f59e0b, #facc15);
+}
+
+.analytics-icon.kidney {
+  background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+.analytics-content h4 {
+  color: #f8fafc;
+
+  margin-bottom: 6px;
+}
+
+.analytics-content p {
+  color: #94a3b8;
+
+  font-size: 14px;
+}
+
+/* ======================================================
+   GROWTH GRID
+====================================================== */
+
+.growth-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+
+  gap: 18px;
+}
+
+.growth-card {
+  background: rgba(255, 255, 255, 0.03);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  border-radius: 20px;
+
+  padding: 22px;
+
+  text-align: center;
+}
+
+.growth-card svg {
+  font-size: 26px;
+
+  color: #38bdf8;
+
+  margin-bottom: 14px;
+}
+
+.growth-card h3 {
+  font-size: 28px;
+
+  color: white;
+
+  margin-bottom: 8px;
+}
+
+.growth-card p {
+  color: #94a3b8;
+
+  font-size: 14px;
+}
+
+/* ======================================================
+   INSIGHTS
+====================================================== */
+
+.admin-insights-card {
+  background: #0f172a;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 26px;
+
+  padding: 26px;
+}
+
+.admin-insights-card h3 {
+  margin-bottom: 22px;
+
+  font-size: 20px;
+
+  color: #f8fafc;
+}
+
+.insight-item {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+.insight-dot {
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #38bdf8;
+
+  margin-top: 8px;
+}
+
+.insight-item p {
+  color: #cbd5e1;
+
+  line-height: 1.7;
+
+  font-size: 14px;
+}
+
+/* ======================================================
+   SYSTEM STATUS
+====================================================== */
+
+.system-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 14px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.system-status:last-child {
+  border-bottom: none;
+}
+
+.system-status span {
+  color: #cbd5e1;
+}
+
+.status-badge {
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-badge.online {
+  background: rgba(16, 185, 129, 0.14);
+
+  color: #86efac;
+}
+
+/* ======================================================
+   TABLE
+====================================================== */
+
+.admin-table-section {
+  margin-top: 20px;
+}
+
+.table-header {
+  margin-bottom: 20px;
+}
+
+.table-header h2 {
+  font-size: 28px;
+
+  margin-bottom: 8px;
+
+  color: #f8fafc;
+}
+
+.table-header p {
+  color: #94a3b8;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+
+  border-radius: 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  background: #0f172a;
+}
+
+.admin-table th {
+  background: #111827;
+
+  color: white;
+
+  padding: 18px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  text-align: left;
+}
+
+.admin-table td {
+  padding: 18px;
+
+  color: #cbd5e1;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+
+  font-size: 14px;
+}
+
+.admin-table tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ======================================================
+   BADGES
+====================================================== */
+
+.disease-badge {
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  background: rgba(14, 165, 233, 0.12);
+
+  color: #38bdf8;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-transform: capitalize;
+}
+
+.risk-badge {
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.risk-badge.high {
+  background: rgba(239, 68, 68, 0.14);
+
+  color: #fca5a5;
+}
+
+.risk-badge.medium {
+  background: rgba(245, 158, 11, 0.14);
+
+  color: #fde68a;
+}
+
+.risk-badge.low {
+  background: rgba(16, 185, 129, 0.14);
+
+  color: #86efac;
+}
+
+/* ======================================================
+   LOADING
+====================================================== */
+
+.admin-loading {
+  min-height: 70vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 18px;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+
+  border: 4px solid rgba(255, 255, 255, 0.1);
+
+  border-top-color: #38bdf8;
+
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.admin-loading p {
+  color: #94a3b8;
+}
+
+/* ======================================================
+   NO DATA
+====================================================== */
+
+.no-data {
+  text-align: center;
+
+  padding: 40px !important;
+
+  color: #94a3b8;
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 1200px) {
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-dashboard {
+    padding: 24px;
+  }
+
+  .admin-header {
+    flex-direction: column;
+  }
+
+  .admin-header h1 {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-dashboard {
+    padding: 18px;
+  }
+
+  .admin-header h1 {
+    font-size: 28px;
+  }
+
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .growth-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 14px;
+  }
+}

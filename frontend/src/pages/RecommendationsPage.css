@@ -1,0 +1,400 @@
+/* frontend/src/pages/RecommendationsPage.css */
+
+.recommendations-page {
+  padding: 30px;
+
+  min-height: 100vh;
+
+  background: var(--dashboard-bg);
+
+  color: var(--text-primary);
+
+  transition: 0.3s ease;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.recommendations-hero {
+  display: grid;
+
+  grid-template-columns: 1.2fr 0.8fr;
+
+  gap: 40px;
+
+  margin-bottom: 40px;
+}
+
+.recommendations-badge {
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  background: rgba(59, 130, 246, 0.12);
+
+  color: #2563eb;
+
+  font-weight: 700;
+
+  margin-bottom: 24px;
+}
+
+.recommendations-hero-left h1 {
+  font-size: 58px;
+
+  line-height: 1.1;
+
+  margin-bottom: 20px;
+
+  font-weight: 800;
+}
+
+.recommendations-hero-left h1 span {
+  background: linear-gradient(90deg, #0ea5e9, #2563eb);
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.recommendations-hero-left p {
+  color: var(--text-secondary);
+
+  line-height: 1.8;
+
+  max-width: 700px;
+
+  font-size: 17px;
+}
+
+/* =========================================
+   STATS
+========================================= */
+
+.recommendations-stats {
+  display: flex;
+
+  gap: 20px;
+
+  margin-top: 30px;
+}
+
+.recommendation-stat-card {
+  background: var(--card-bg);
+
+  border: 1px solid var(--border-color);
+
+  padding: 24px;
+
+  border-radius: 24px;
+
+  min-width: 150px;
+
+  box-shadow: var(--shadow-md);
+}
+
+.recommendation-stat-card h2 {
+  font-size: 34px;
+
+  margin-bottom: 8px;
+}
+
+/* =========================================
+   GLASS CARD
+========================================= */
+
+.recommendations-hero-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recommendation-glass-card {
+  width: 300px;
+
+  padding: 36px;
+
+  border-radius: 30px;
+
+  backdrop-filter: blur(20px);
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  text-align: center;
+
+  box-shadow: var(--shadow-lg);
+}
+
+.recommendation-glass-card svg {
+  font-size: 48px;
+
+  color: #0ea5e9;
+
+  margin-bottom: 20px;
+}
+
+.recommendation-live-status {
+  margin-top: 18px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #22c55e;
+
+  font-weight: 700;
+}
+
+.recommendation-live-status span {
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+}
+
+/* =========================================
+   GRID
+========================================= */
+
+.recommendations-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+  gap: 25px;
+
+  margin-bottom: 35px;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.recommendation-card {
+  background: var(--card-bg);
+
+  border: 1px solid var(--border-color);
+
+  border-radius: 28px;
+
+  padding: 30px;
+
+  transition: 0.35s ease;
+
+  box-shadow: var(--shadow-md);
+}
+
+.recommendation-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow: var(--shadow-lg);
+}
+
+.recommendation-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+.recommendation-main-icon {
+  width: 68px;
+  height: 68px;
+
+  border-radius: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  font-size: 28px;
+}
+
+.red {
+  background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.blue {
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+}
+
+.green {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.purple {
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+}
+
+.cyan {
+  background: linear-gradient(135deg, #06b6d4, #0ea5e9);
+}
+
+.orange {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+}
+
+.recommendation-status {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: #22c55e;
+
+  font-weight: 700;
+}
+
+.recommendation-card h3 {
+  font-size: 24px;
+
+  margin-bottom: 14px;
+}
+
+.recommendation-card p {
+  color: var(--text-secondary);
+
+  line-height: 1.8;
+
+  margin-bottom: 20px;
+}
+
+/* =========================================
+   POINTS
+========================================= */
+
+.recommendation-points {
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+
+  padding: 0;
+}
+
+.recommendation-points li {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: var(--text-secondary);
+}
+
+.recommendation-points svg {
+  color: #2563eb;
+}
+
+/* =========================================
+   WELLNESS
+========================================= */
+
+.wellness-card {
+  background: linear-gradient(
+    135deg,
+    rgba(14, 165, 233, 0.14),
+    rgba(37, 99, 235, 0.08)
+  );
+
+  border: 1px solid rgba(59, 130, 246, 0.15);
+
+  border-radius: 30px;
+
+  padding: 32px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 24px;
+
+  box-shadow: var(--shadow-lg);
+}
+
+.wellness-icon {
+  width: 80px;
+  height: 80px;
+
+  border-radius: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+
+  color: white;
+
+  font-size: 34px;
+}
+
+.wellness-card h2 {
+  font-size: 32px;
+
+  margin-bottom: 10px;
+}
+
+.wellness-card p {
+  color: var(--text-secondary);
+
+  line-height: 1.8;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1200px) {
+  .recommendations-hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .recommendations-page {
+    padding: 20px;
+  }
+
+  .recommendations-hero-left h1 {
+    font-size: 42px;
+  }
+
+  .recommendations-stats {
+    flex-direction: column;
+  }
+
+  .wellness-card {
+    flex-direction: column;
+
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .recommendations-hero-left h1 {
+    font-size: 34px;
+  }
+
+  .recommendation-card {
+    padding: 24px;
+  }
+
+  .wellness-card {
+    padding: 24px;
+  }
+}
