@@ -319,30 +319,23 @@ The application is fully optimized for:
 
 ## Landing Page
 
-Add screenshot here:
+ 
 
-```bash
-frontend/public/screenshots/landing.png
-```
+ ![Landing Page](frontend/public/screenshots/landing.png)
+ 
 
 ---
 
 ## Dashboard
-
-```bash
-frontend/public/screenshots/dashboard.png
-```
+![Dashboard](frontend/public/screenshots/dashboard.png)
 
 ---
 
 ## Prediction Modules
 
-```bash
-frontend/public/screenshots/heart.png
-frontend/public/screenshots/diabetes.png
-frontend/public/screenshots/kidney.png
-```
-
+![Heart Prediction](frontend/public/screenshots/heart.png)
+![Diabetes Prediction](frontend/public/screenshots/diabetes.png)
+![Kidney Prediction](frontend/public/screenshots/kidney.png)
 ---
 
 # 👩‍💻 Author
