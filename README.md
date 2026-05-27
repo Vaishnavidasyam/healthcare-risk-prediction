@@ -149,7 +149,7 @@ healthcare-risk-prediction/
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/smartmed-analytics.git
+git clone https://github.com/Vaishnavidasyam/healthcare-risk-prediction.git
 ```
 
 ---
