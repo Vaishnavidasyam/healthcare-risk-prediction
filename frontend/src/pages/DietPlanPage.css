@@ -1,0 +1,46 @@
+/* frontend/src/pages/DietPlanPage.css */
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+}
+
+.stat-icon {
+    font-size: 32px;
+    color: var(--medical-blue);
+    background: var(--medical-blue-subtle);
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.stat-info span {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+}
+
+.stat-info strong {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--text-primary);
+}
+
+.meal-plan-table {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.meal-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 16px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}

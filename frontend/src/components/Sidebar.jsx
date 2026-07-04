@@ -1,7 +1,4 @@
-// frontend/src/components/Sidebar.jsx
-
 import React from "react";
-
 import {
   FaChartPie,
   FaHeart,
@@ -12,165 +9,109 @@ import {
   FaCog,
   FaChevronLeft,
   FaChevronRight,
-  FaCircle,
   FaBrain,
-  FaShieldAlt,
 } from "react-icons/fa";
-
+import { motion, AnimatePresence } from "framer-motion";
+import logo from "../assets/health-screening.png";
 import "./Sidebar.css";
 
-const Sidebar = ({
-  active,
-  onSelect,
-  collapsed = false,
-  setCollapsed = () => {},
-}) => {
-  const menuItems = [
+const Sidebar = ({ active, onSelect, collapsed, setCollapsed }) => {
+  const menuSections = [
     {
-      section: "MAIN",
-
-      items: [
-        {
-          key: "overview",
-          label: "Overview",
-          icon: <FaChartPie />,
-        },
-      ],
+      section: "OVERVIEW",
+      color: "#6366f1", // Indigo
+      items: [ { key: "overview", label: "Dashboard", icon: <FaChartPie /> } ],
     },
-
-    {
-      section: "PREDICTIONS",
-
-      items: [
-        {
-          key: "heart",
-          label: "Heart Risk",
-          icon: <FaHeart />,
-        },
-
-        {
-          key: "diabetes",
-          label: "Diabetes Risk",
-          icon: <FaTint />,
-        },
-
-        {
-          key: "kidney",
-          label: "Kidney Risk",
-          icon: <FaNotesMedical />,
-        },
-      ],
-    },
-
     {
       section: "INTELLIGENCE",
-
+      color: "#8b5cf6", // Violet
       items: [
-        {
-          key: "analytics",
-          label: "Analytics",
-          icon: <FaChartLine />,
-        },
-
-        {
-          key: "reports",
-          label: "Reports",
-          icon: <FaFileMedical />,
-        },
+        { key: "copilot", label: "AI Assistant", icon: <FaBrain /> },
+        { key: "reports", label: "Report Intelligence", icon: <FaFileMedical /> },
       ],
     },
-
     {
-      section: "SYSTEM",
-
+      section: "TRACKING",
+      color: "#14b8a6", // Teal
+      items: [ { key: "analytics", label: "Analytics", icon: <FaChartLine /> } ],
+    },
+    {
+      section: "PREDICTIONS",
+      color: "#ec4899", // Pink
       items: [
-        {
-          key: "settings",
-          label: "Settings",
-          icon: <FaCog />,
-        },
+        { key: "heart", label: "Heart Risk", icon: <FaHeart /> },
+        { key: "diabetes", label: "Diabetes Risk", icon: <FaTint /> },
+        { key: "kidney", label: "Kidney Risk", icon: <FaNotesMedical /> },
       ],
     },
   ];
 
   return (
-    <aside className={`sidebar ${collapsed ? "sidebar-collapsed" : ""}`}>
-      <div className="sidebar-content">
-        {/* =====================================
-            TOP
-        ===================================== */}
-
-        <div className="sidebar-top">
-          <button
-            className="sidebar-toggle-btn"
-            onClick={() => setCollapsed((prev) => !prev)}
-          >
-            {collapsed ? <FaChevronRight /> : <FaChevronLeft />}
-          </button>
+    <aside className={`enterprise-sidebar ${collapsed ? "collapsed" : ""}`}>
+      <div className="sidebar-brand">
+        <div className="brand-logo-wrapper">
+          <img src={logo} alt="SmartMed AI" className="brand-logo" />
         </div>
+        <AnimatePresence>
+          {!collapsed && (
+            <motion.span 
+              className="brand-name"
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              SmartMed <span>AI</span>
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </div>
 
-        {/* =====================================
-            MENU
-        ===================================== */}
+      <button 
+        className="collapse-btn" 
+        onClick={() => setCollapsed(!collapsed)}
+        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+      >
+        {collapsed ? <FaChevronRight /> : <FaChevronLeft />}
+      </button>
 
-        <div className="sidebar-menu-wrapper">
-          {menuItems.map((group) => (
-            <div key={group.section} className="sidebar-group">
+      <div className="sidebar-scroll-area">
+        {menuSections.map((section, idx) => (
+          <div key={idx} className="sidebar-section" style={{ '--section-color': section.color }}>
+            <AnimatePresence>
               {!collapsed && (
-                <p className="sidebar-section-title">{group.section}</p>
+                <motion.h5 
+                  className="section-title"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  {section.section}
+                </motion.h5>
               )}
-
-              <ul className="sidebar-menu">
-                {group.items.map((item) => (
-                  <li
-                    key={item.key}
-                    className={
-                      active === item.key
-                        ? "sidebar-item active"
-                        : "sidebar-item"
-                    }
-                    onClick={() => onSelect(item.key)}
-                  >
-                    <span className="sidebar-icon">{item.icon}</span>
-
-                    {!collapsed && (
-                      <>
-                        <span className="sidebar-label">{item.label}</span>
-
-                        {active === item.key && (
-                          <span className="sidebar-active-dot">
-                            <FaCircle />
-                          </span>
-                        )}
-                      </>
-                    )}
-                  </li>
-                ))}
-              </ul>
+            </AnimatePresence>
+            <div className="section-items">
+              {section.items.map((item) => (
+                <button
+                  key={item.key}
+                  className={`menu-item ${active === item.key ? "active" : ""}`}
+                  onClick={() => onSelect(item.key)}
+                  title={collapsed ? item.label : ""}
+                >
+                  <span className="item-icon">{item.icon}</span>
+                  {!collapsed && <span className="item-label">{item.label}</span>}
+                </button>
+              ))}
             </div>
-          ))}
-        </div>
-
-        {/* =====================================
-            BOTTOM CARD
-        ===================================== */}
-
-        {!collapsed && (
-          <div className="sidebar-bottom-card">
-            <div className="sidebar-bottom-glow" />
-
-            <h4>AI Health Recommendations</h4>
-
-            <p>
-              Maintain hydration, monitor your vitals, and schedule regular
-              health screenings.
-            </p>
-
-            <button onClick={() => onSelect("recommendations")}>
-              View Recommendations
-            </button>
           </div>
-        )}
+        ))}
+      </div>
+
+      <div className="sidebar-footer">
+        <button className="menu-item settings-btn" onClick={() => onSelect("settings")}>
+          <span className="item-icon"><FaCog /></span>
+          {!collapsed && <span className="item-label">Settings</span>}
+        </button>
       </div>
     </aside>
   );

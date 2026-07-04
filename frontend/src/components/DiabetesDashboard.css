@@ -1,0 +1,67 @@
+/* frontend/src/components/DiabetesDashboard.css */
+
+.diabetes-dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 24px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.glucose-analysis-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.glucose-gauge-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.gauge {
+  width: 100px;
+  height: 100px;
+}
+
+.glucose-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.glucose-info strong { font-size: 24px; color: var(--text-primary); }
+.status-pill {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.status-pill.normal { background: var(--status-success-bg); color: var(--status-success); }
+.status-pill.elevated { background: var(--status-warning-bg); color: #d97706; }
+
+.complications-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.complication-card {
+  padding: 16px;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
+
+.comp-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.comp-risk.high-risk { color: var(--status-danger); }
+.comp-risk.moderate-risk { color: #f59e0b; }
+.comp-risk.low-risk { color: var(--status-success); }

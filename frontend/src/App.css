@@ -1,160 +1,185 @@
-/* =========================================================
-   GLOBAL RESET
-========================================================= */
-
+/* Global App Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ENTERPRISE LAYOUT SYSTEM */
+.enterprise-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-primary);
+}
+
+.enterprise-sidebar-wrapper {
+  height: 100vh;
+  z-index: 1100;
+  transition: all var(--transition-speed) var(--transition-smooth);
+}
+
+@media (max-width: 768px) {
+  .enterprise-sidebar-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+  }
+
+  .enterprise-sidebar-wrapper.mobile-open {
+    transform: translateX(0);
+  }
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1050;
+  animation: fadeIn 0.3s ease;
+}
+
+.content-viewport {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--bg-primary);
+  border-left: 1px solid var(--border-color);
+}
+
+
+@media (max-width: 768px) {
+  .content-viewport {
+    border-left: none;
+  }
+}
+
+.scrollable-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: Inter, sans-serif;
-  transition:
-    background 0.3s ease,
-    color 0.3s ease;
+/* MOBILE TOGGLE (Logic in AppShell) */
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* =========================================================
-   DARK THEME
-========================================================= */
-
-body.dark-theme {
-  --bg-primary: #020617;
-  --bg-secondary: #0f172a;
-  --bg-card: #081028;
-  --bg-card-light: #101b35;
-
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-
-  --border-color: rgba(255, 255, 255, 0.06);
-
-  --accent-primary: #0ea5e9;
-  --accent-secondary: #2563eb;
-
-  --success: #22c55e;
-  --danger: #ef4444;
-  --warning: #f59e0b;
-
-  background:
-    radial-gradient(
-      circle at top left,
-      rgba(14, 165, 233, 0.12),
-      transparent 30%
-    ),
-    linear-gradient(180deg, #020617, #081120);
-
-  color: var(--text-primary);
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
 }
 
-/* =========================================================
-   LIGHT THEME
-========================================================= */
 
-body.light-theme {
-  --bg-primary: #f1f5f9;
-  --bg-secondary: #ffffff;
-  --bg-card: #ffffff;
-  --bg-card-light: #f8fafc;
-
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-
-  --border-color: rgba(15, 23, 42, 0.08);
-
-  --accent-primary: #0ea5e9;
-  --accent-secondary: #2563eb;
-
-  --success: #16a34a;
-  --danger: #dc2626;
-  --warning: #d97706;
-
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(14, 165, 233, 0.08),
-      transparent 30%
-    ),
-    linear-gradient(180deg, #f8fafc, #e2e8f0);
-
-  color: var(--text-primary);
-}
-
-/* =========================================================
-   APP
-========================================================= */
-
-.app-container {
-  min-height: 100vh;
-}
-
-/* =========================================================
-   COMMON CARD STYLE
-========================================================= */
-
+/* GLASS CARDS - Unified */
 .glass-card {
   background: var(--bg-card);
-
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-color);
-
-  border-radius: 28px;
-
-  backdrop-filter: blur(16px);
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-premium);
+  border-radius: 24px;
+  transition: all var(--transition-speed) var(--transition-smooth);
 }
 
-/* =========================================================
-   BUTTONS
-========================================================= */
+.glass-card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-hover);
+}
 
-.primary-btn {
-  border: none;
-
-  padding: 14px 22px;
-
-  border-radius: 18px;
-
-  background: linear-gradient(
-    135deg,
-    var(--accent-primary),
-    var(--accent-secondary)
-  );
-
-  color: white;
-
+/* BUTTONS */
+.btn-premium {
+  padding: 12px 24px;
+  border-radius: 14px;
   font-weight: 700;
-
   cursor: pointer;
-
-  transition: 0.3s ease;
+  transition: all var(--transition-speed) var(--transition-smooth);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
 }
 
-.primary-btn:hover {
-  transform: translateY(-3px);
-
-  box-shadow: 0 12px 26px rgba(14, 165, 233, 0.28);
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2);
 }
 
-/* =========================================================
-   SCROLLBAR
-========================================================= */
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(14, 165, 233, 0.3);
+}
 
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  background: var(--bg-accent);
+  border-color: var(--medical-blue);
+  color: var(--medical-blue);
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+/* CUSTOM SCROLLBAR */
 ::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.4);
-
-  border-radius: 999px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--bg-primary);
 }
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+

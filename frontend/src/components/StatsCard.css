@@ -1,0 +1,136 @@
+/* frontend/src/components/StatsCard.css */
+/* Premium Stats Card Styles */
+
+.stats-card {
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  cursor: default;
+}
+
+.stats-card.clickable {
+  cursor: pointer;
+}
+
+/* Icon Wrapper */
+.stats-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+/* Content */
+.stats-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.stats-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.stats-value-row {
+  margin-bottom: 12px;
+}
+
+.stats-value {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+/* Trend */
+.stats-trend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.stats-trend.positive {
+  color: var(--status-success);
+}
+
+.stats-trend.negative {
+  color: var(--status-danger);
+}
+
+.stats-trend.neutral {
+  color: var(--text-muted);
+}
+
+.trend-icon {
+  font-size: 10px;
+}
+
+.trend-value {
+  font-weight: 700;
+}
+
+.trend-label {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stats-card {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .stats-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  .stats-value {
+    font-size: 28px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-card {
+    padding: 16px;
+  }
+
+  .stats-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .stats-value {
+    font-size: 24px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

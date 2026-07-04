@@ -1,0 +1,413 @@
+/* frontend/src/components/HeartResultCard.css */
+
+.heart-result-card {
+  margin-top: 40px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
+  background:
+    radial-gradient(circle at 15% 0%, rgba(239, 68, 68, 0.12), transparent 34%),
+    linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16);
+}
+
+.heart-result-card.high-risk {
+  border-color: rgba(239, 68, 68, 0.36);
+}
+
+.heart-result-card.medium-risk {
+  border-color: rgba(245, 158, 11, 0.36);
+}
+
+.heart-result-card.low-risk {
+  border-color: rgba(16, 185, 129, 0.36);
+}
+
+.heart-result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px 32px 22px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.heart-result-eyebrow,
+.heart-section-title span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--medical-blue-light);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.heart-result-header h3 {
+  color: var(--text-primary);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.4px;
+}
+
+.heart-status-pill {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.heart-status-pill.high-risk {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+}
+
+.heart-status-pill.medium-risk {
+  background: var(--status-warning-bg);
+  color: var(--status-warning);
+}
+
+.heart-status-pill.low-risk {
+  background: var(--status-success-bg);
+  color: var(--status-success);
+}
+
+.heart-result-hero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  padding: 32px;
+}
+
+.heart-icon-orb {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+  color: white;
+  font-size: 30px;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.18);
+}
+
+.heart-icon-orb.high-risk { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+.heart-icon-orb.medium-risk { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.heart-icon-orb.low-risk { background: linear-gradient(135deg, #10b981, #059669); }
+
+.heart-primary-copy {
+  min-width: 0;
+}
+
+.heart-primary-copy span {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.heart-primary-copy h2 {
+  margin: 6px 0 8px;
+  color: var(--text-primary);
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.heart-primary-copy p {
+  max-width: 680px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.heart-score-card {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.heart-score-dial {
+  --dial-color: var(--status-success);
+  width: 132px;
+  height: 132px;
+  padding: 10px;
+  border-radius: 50%;
+  background: conic-gradient(var(--dial-color) var(--score), var(--border-color) 0);
+  box-shadow: inset 0 0 0 1px var(--border-color), 0 18px 36px rgba(0, 0, 0, 0.12);
+}
+
+.heart-score-dial.high-risk { --dial-color: var(--status-danger); }
+.heart-score-dial.medium-risk { --dial-color: var(--status-warning); }
+.heart-score-dial.low-risk { --dial-color: var(--status-success); }
+
+.heart-score-inner {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border-radius: 50%;
+  background: var(--bg-card);
+  text-align: center;
+}
+
+.heart-score-inner strong {
+  color: var(--text-primary);
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.heart-score-inner span {
+  margin-top: 7px;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.heart-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 0 32px 32px;
+}
+
+.heart-metric,
+.heart-marker-card,
+.heart-interpretation-card,
+.heart-xai-card {
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--bg-card);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+}
+
+.heart-metric {
+  padding: 16px;
+}
+
+.heart-metric span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.heart-metric strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.heart-section-title {
+  padding: 0 32px 0;
+}
+
+.heart-section-title h4 {
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.heart-section-title p {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.heart-marker-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  padding: 20px 32px 32px;
+}
+
+.heart-marker-card {
+  min-height: 138px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 14px;
+  padding: 18px;
+  background: linear-gradient(180deg, var(--bg-card), var(--bg-secondary));
+}
+
+.heart-marker-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.09);
+  color: var(--status-danger);
+  font-size: 17px;
+}
+
+.heart-marker-card small {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.heart-marker-card strong {
+  display: block;
+  color: var(--text-primary);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.heart-marker-status {
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.heart-marker-status.high,
+.heart-marker-status.low,
+.heart-marker-status.flagged {
+  background: var(--status-danger-bg);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: var(--status-danger);
+}
+
+.heart-marker-status.normal,
+.heart-marker-status.healthy,
+.heart-marker-status.clear {
+  background: var(--status-success-bg);
+  border-color: rgba(16, 185, 129, 0.2);
+  color: var(--status-success);
+}
+
+.heart-analysis-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 14px;
+  padding: 0 32px 32px;
+}
+
+.heart-interpretation-card,
+.heart-xai-card {
+  padding: 22px;
+}
+
+.heart-interpretation-card h4,
+.heart-xai-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  font-size: 17px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.heart-interpretation-card h4 svg,
+.heart-xai-header > svg {
+  color: var(--status-danger);
+}
+
+.heart-interpretation-card p {
+  margin: 0;
+  padding: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.heart-xai-header {
+  align-items: flex-start;
+}
+
+.heart-xai-header h4 {
+  margin: 0 0 4px;
+  color: var(--text-primary);
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.heart-xai-header p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.heart-xai-card .xai-premium-container {
+  gap: 22px;
+}
+
+.heart-xai-card .feature-card,
+.heart-xai-card .rec-card {
+  background: var(--bg-secondary);
+}
+
+.heart-result-footer {
+  padding: 18px 32px;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 980px) {
+  .heart-result-hero,
+  .heart-analysis-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .heart-marker-grid,
+  .heart-metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .heart-score-card {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 620px) {
+  .heart-result-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .heart-result-hero {
+    text-align: center;
+  }
+
+  .heart-icon-orb,
+  .heart-score-card {
+    margin: 0 auto;
+  }
+
+  .heart-marker-grid,
+  .heart-metrics-row {
+    grid-template-columns: 1fr;
+  }
+}

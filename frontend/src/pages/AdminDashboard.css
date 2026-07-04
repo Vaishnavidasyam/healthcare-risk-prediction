@@ -1,525 +1,193 @@
 /* frontend/src/pages/AdminDashboard.css */
 
-.admin-dashboard {
-  min-height: 100vh;
-
-  padding: 34px;
-
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(14, 165, 233, 0.08),
-      transparent 20%
-    ),
-    radial-gradient(
-      circle at bottom left,
-      rgba(6, 182, 212, 0.06),
-      transparent 20%
-    ),
-    #020617;
+.admin-enterprise-page {
+  padding: 40px;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
-/* ======================================================
-   HEADER
-====================================================== */
-
-.admin-header {
+.admin-header-premium {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-
-  gap: 20px;
-
-  margin-bottom: 34px;
+  align-items: flex-end;
+  margin-bottom: 48px;
+  animation: fadeInDown 0.6s var(--transition-smooth);
 }
 
-.admin-header h1 {
-  font-size: 42px;
-  font-weight: 800;
-
-  color: #f8fafc;
-
+.admin-badge-enterprise {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: var(--status-danger-bg);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  color: var(--status-danger);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   margin-bottom: 12px;
 }
 
-.admin-header p {
-  max-width: 720px;
-
-  color: #94a3b8;
-
-  line-height: 1.8;
-
-  font-size: 15px;
+.header-left h1 { 
+  font-size: 40px; 
+  font-weight: 900; 
+  letter-spacing: -1.5px; 
+  color: var(--text-primary);
 }
 
-/* ======================================================
-   BADGE
-====================================================== */
+.header-left h1 span {
+  background: linear-gradient(90deg, var(--status-danger), var(--medical-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-.admin-badge {
+.system-health-panel {
+  padding: 16px 24px;
   display: flex;
-  align-items: center;
-
+  flex-direction: column;
   gap: 10px;
-
-  background: rgba(14, 165, 233, 0.12);
-
-  border: 1px solid rgba(14, 165, 233, 0.22);
-
-  color: #38bdf8;
-
-  padding: 14px 18px;
-
+  background: var(--bg-secondary);
   border-radius: 16px;
-
-  font-weight: 700;
+  border: 1px solid var(--border-color);
 }
 
-/* ======================================================
-   STATS
-====================================================== */
-
-.admin-stats {
-  display: grid;
-
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-
-  gap: 24px;
-
-  margin-bottom: 32px;
-}
-
-/* ======================================================
-   GRID
-====================================================== */
-
-.admin-grid {
-  display: grid;
-
-  grid-template-columns: 2fr 1fr;
-
-  gap: 24px;
-
-  margin-bottom: 34px;
-}
-
-.admin-grid-left,
-.admin-grid-right {
-  display: flex;
-  flex-direction: column;
-
-  gap: 24px;
-}
-
-/* ======================================================
-   ANALYTICS
-====================================================== */
-
-.analytics-placeholder {
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 18px;
-}
-
-.analytics-row {
+.health-node {
   display: flex;
   align-items: center;
-
-  gap: 18px;
-
-  background: rgba(255, 255, 255, 0.03);
-
-  border: 1px solid rgba(255, 255, 255, 0.05);
-
-  border-radius: 18px;
-
-  padding: 18px;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
 }
 
-.analytics-icon {
+.pulse-green { width: 8px; height: 8px; background: var(--status-success); border-radius: 50%; box-shadow: 0 0 8px var(--status-success); animation: blink 2s infinite; }
+.pulse-blue { width: 8px; height: 8px; background: var(--medical-blue); border-radius: 50%; box-shadow: 0 0 8px var(--medical-blue); animation: blink 2s infinite; }
+
+/* KPI GRID */
+.admin-kpi-grid-premium {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.admin-kpi-card-premium { padding: 24px; display: flex; align-items: center; gap: 20px; }
+
+.kpi-icon-box-admin {
   width: 52px;
   height: 52px;
-
-  border-radius: 16px;
-
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  color: white;
-
-  font-size: 20px;
+  font-size: 22px;
 }
 
-.analytics-icon.heart {
-  background: linear-gradient(135deg, #ef4444, #f87171);
-}
+.kpi-icon-box-admin.blue { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+.kpi-icon-box-admin.green { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+.kpi-icon-box-admin.orange { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.kpi-icon-box-admin.red { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
 
-.analytics-icon.diabetes {
-  background: linear-gradient(135deg, #f59e0b, #facc15);
-}
+.kpi-info-admin span { font-size: 11px; color: var(--text-muted); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+.kpi-info-admin h3 { font-size: 24px; font-weight: 900; margin: 4px 0; color: var(--text-primary); }
+.kpi-trend-admin { font-size: 11px; color: var(--text-muted); }
+.kpi-trend-admin span { color: var(--status-success); font-weight: 800; }
 
-.analytics-icon.kidney {
-  background: linear-gradient(135deg, #10b981, #34d399);
-}
-
-.analytics-content h4 {
-  color: #f8fafc;
-
-  margin-bottom: 6px;
-}
-
-.analytics-content p {
-  color: #94a3b8;
-
-  font-size: 14px;
-}
-
-/* ======================================================
-   GROWTH GRID
-====================================================== */
-
-.growth-grid {
-  width: 100%;
-
+/* MAIN GRID */
+.admin-main-grid-premium {
   display: grid;
-
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-
-  gap: 18px;
+  grid-template-columns: 1fr 400px;
+  gap: 32px;
 }
 
-.growth-card {
-  background: rgba(255, 255, 255, 0.03);
+.admin-charts-pane { display: flex; flex-direction: column; gap: 32px; }
+.admin-chart-block { padding: 32px; }
 
-  border: 1px solid rgba(255, 255, 255, 0.06);
-
-  border-radius: 20px;
-
-  padding: 22px;
-
-  text-align: center;
+.chart-header-admin h3 { 
+  font-size: 18px; 
+  font-weight: 800; 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+  color: var(--text-primary);
 }
 
-.growth-card svg {
-  font-size: 26px;
+.chart-header-admin p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
 
-  color: #38bdf8;
-
-  margin-bottom: 14px;
+.admin-infra-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
 }
 
-.growth-card h3 {
-  font-size: 28px;
+.infra-card { padding: 24px; }
+.infra-card h3 { font-size: 13px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: var(--text-muted); text-transform: uppercase; }
 
-  color: white;
+.infra-stats { display: flex; justify-content: space-between; margin-bottom: 12px; }
+.i-stat span { display: block; font-size: 11px; color: var(--text-muted); text-transform: uppercase; }
+.i-stat strong { font-size: 16px; font-weight: 800; color: var(--text-primary); }
 
-  margin-bottom: 8px;
-}
+.progress-mini { height: 6px; background: var(--bg-tertiary); border-radius: 3px; overflow: hidden; margin-top: 8px; }
+.p-fill { height: 100%; background: var(--status-success); box-shadow: 0 0 10px var(--status-success); }
+.p-fill.blue { background: var(--medical-blue); box-shadow: 0 0 10px var(--medical-blue); }
 
-.growth-card p {
-  color: #94a3b8;
+/* PRIORITY PANE */
+.admin-priority-card { padding: 32px; }
+.live-tag-admin { font-size: 10px; font-weight: 900; color: var(--status-danger); border: 1px solid var(--status-danger); padding: 2px 8px; border-radius: 4px; letter-spacing: 1px; }
 
-  font-size: 14px;
-}
+.priority-list-admin { display: flex; flex-direction: column; gap: 16px; margin: 24px 0; }
 
-/* ======================================================
-   INSIGHTS
-====================================================== */
-
-.admin-insights-card {
-  background: #0f172a;
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  border-radius: 26px;
-
-  padding: 26px;
-}
-
-.admin-insights-card h3 {
-  margin-bottom: 22px;
-
-  font-size: 20px;
-
-  color: #f8fafc;
-}
-
-.insight-item {
-  display: flex;
-  align-items: flex-start;
-
-  gap: 12px;
-
-  margin-bottom: 18px;
-}
-
-.insight-dot {
-  width: 10px;
-  height: 10px;
-
-  border-radius: 50%;
-
-  background: #38bdf8;
-
-  margin-top: 8px;
-}
-
-.insight-item p {
-  color: #cbd5e1;
-
-  line-height: 1.7;
-
-  font-size: 14px;
-}
-
-/* ======================================================
-   SYSTEM STATUS
-====================================================== */
-
-.system-status {
+.priority-item-premium {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  padding: 14px 0;
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 16px;
+  padding: 16px;
+  background: var(--bg-tertiary);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease;
 }
 
-.system-status:last-child {
-  border-bottom: none;
+.priority-item-premium:hover {
+  transform: translateX(5px);
+  border-color: var(--status-danger);
 }
 
-.system-status span {
-  color: #cbd5e1;
-}
+.p-avatar { width: 40px; height: 40px; background: var(--status-danger); border-radius: 50%; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3); }
 
-.status-badge {
-  padding: 8px 14px;
+.p-info h4 { font-size: 15px; font-weight: 800; color: var(--text-primary); }
+.p-info span { font-size: 12px; color: var(--text-muted); }
+.p-info strong { color: var(--status-danger); font-weight: 700; }
 
-  border-radius: 999px;
+.p-tag { margin-left: auto; font-size: 10px; font-weight: 800; background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 6px; color: var(--text-muted); text-transform: uppercase; }
 
-  font-size: 12px;
-  font-weight: 700;
-}
+.admin-security-card { padding: 24px; }
+.admin-security-card h3 { font-size: 13px; font-weight: 800; color: var(--text-muted); margin-bottom: 20px; text-transform: uppercase; }
 
-.status-badge.online {
-  background: rgba(16, 185, 129, 0.14);
+.security-check-list { display: flex; flex-direction: column; gap: 14px; }
+.s-check { display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 600; color: var(--status-success); }
 
-  color: #86efac;
-}
-
-/* ======================================================
-   TABLE
-====================================================== */
-
-.admin-table-section {
-  margin-top: 20px;
-}
-
-.table-header {
-  margin-bottom: 20px;
-}
-
-.table-header h2 {
-  font-size: 28px;
-
-  margin-bottom: 8px;
-
-  color: #f8fafc;
-}
-
-.table-header p {
-  color: #94a3b8;
-}
-
-.table-wrapper {
-  overflow-x: auto;
-
-  border-radius: 24px;
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.admin-table {
-  width: 100%;
-
-  border-collapse: collapse;
-
-  background: #0f172a;
-}
-
-.admin-table th {
-  background: #111827;
-
-  color: white;
-
-  padding: 18px;
-
-  font-size: 14px;
-  font-weight: 700;
-
-  text-align: left;
-}
-
-.admin-table td {
-  padding: 18px;
-
-  color: #cbd5e1;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-
-  font-size: 14px;
-}
-
-.admin-table tr:hover {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-/* ======================================================
-   BADGES
-====================================================== */
-
-.disease-badge {
-  padding: 8px 14px;
-
-  border-radius: 999px;
-
-  background: rgba(14, 165, 233, 0.12);
-
-  color: #38bdf8;
-
-  font-size: 12px;
-  font-weight: 700;
-
-  text-transform: capitalize;
-}
-
-.risk-badge {
-  padding: 8px 14px;
-
-  border-radius: 999px;
-
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.risk-badge.high {
-  background: rgba(239, 68, 68, 0.14);
-
-  color: #fca5a5;
-}
-
-.risk-badge.medium {
-  background: rgba(245, 158, 11, 0.14);
-
-  color: #fde68a;
-}
-
-.risk-badge.low {
-  background: rgba(16, 185, 129, 0.14);
-
-  color: #86efac;
-}
-
-/* ======================================================
-   LOADING
-====================================================== */
-
-.admin-loading {
-  min-height: 70vh;
-
+/* LOADING */
+.admin-loading-premium {
+  height: 60vh;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
-
-  gap: 18px;
 }
 
-.loader {
-  width: 50px;
-  height: 50px;
-
+.admin-pulse-ring {
+  width: 64px;
+  height: 64px;
+  border: 4px solid var(--status-danger);
   border-radius: 50%;
-
-  border: 4px solid rgba(255, 255, 255, 0.1);
-
-  border-top-color: #38bdf8;
-
-  animation: spin 1s linear infinite;
+  animation: pulse-glow 2s infinite;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.admin-loading p {
-  color: #94a3b8;
-}
-
-/* ======================================================
-   NO DATA
-====================================================== */
-
-.no-data {
-  text-align: center;
-
-  padding: 40px !important;
-
-  color: #94a3b8;
-}
-
-/* ======================================================
-   RESPONSIVE
-====================================================== */
-
-@media (max-width: 1200px) {
-  .admin-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 900px) {
-  .admin-dashboard {
-    padding: 24px;
-  }
-
-  .admin-header {
-    flex-direction: column;
-  }
-
-  .admin-header h1 {
-    font-size: 34px;
-  }
-}
-
-@media (max-width: 640px) {
-  .admin-dashboard {
-    padding: 18px;
-  }
-
-  .admin-header h1 {
-    font-size: 28px;
-  }
-
-  .admin-stats {
-    grid-template-columns: 1fr;
-  }
-
-  .growth-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .admin-table th,
-  .admin-table td {
-    padding: 14px;
-  }
-}
+/* LIGHT THEME */
+body.light-theme .admin-kpi-card-premium, 
+body.light-theme .admin-chart-block, 
+body.light-theme .admin-priority-card { background: white; }
+body.light-theme .priority-item-premium { background: #fff5f5; }

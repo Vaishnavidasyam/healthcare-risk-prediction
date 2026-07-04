@@ -68,9 +68,36 @@ const HealthCard = ({
   level = "Unknown",
   percentage = 0,
   description,
+  compact = false,
 }) => {
+  const statusClass = getStatusClass(level);
+
+  if (compact) {
+    return (
+      <div className={`health-card-compact ${statusClass}`}>
+        <div className="compact-header">
+          <div className="compact-icon">{getHealthIcon(title)}</div>
+          <div className="compact-title-group">
+            <h4>{title}</h4>
+            <span className={`compact-status ${statusClass}`}>{level}</span>
+          </div>
+        </div>
+        <div className="compact-risk">
+          <span className="risk-percent">{percentage}%</span>
+          <div className="compact-trend-icon">{getTrendIcon(level)}</div>
+        </div>
+        <div className="compact-progress-bar">
+          <div 
+            className={`compact-progress-fill ${statusClass}`} 
+            style={{ width: `${Math.min(percentage, 100)}%` }}
+          ></div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={`health-card ${getStatusClass(level)}`}>
+    <div className={`health-card ${statusClass}`}>
       {/* TOP */}
       <div className="health-card-header">
         <div className="health-card-icon">{getHealthIcon(title)}</div>
@@ -78,7 +105,7 @@ const HealthCard = ({
         <div className="health-card-title-section">
           <h4>{title}</h4>
 
-          <span className={`health-status ${getStatusClass(level)}`}>
+          <span className={`health-status ${statusClass}`}>
             {level}
           </span>
         </div>
@@ -110,7 +137,7 @@ const HealthCard = ({
       <div className="health-card-footer">
         <div className="health-progress">
           <div
-            className={`health-progress-fill ${getStatusClass(level)}`}
+            className={`health-progress-fill ${statusClass}`}
             style={{
               width: `${Math.min(percentage, 100)}%`,
             }}

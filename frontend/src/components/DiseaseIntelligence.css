@@ -1,0 +1,168 @@
+/* frontend/src/components/DiseaseIntelligence.css */
+
+.intelligence-container {
+  padding: 0 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-title { padding-top: 6px; }
+
+.section-title span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--status-warning, #f59e0b);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.section-title h4 {
+  color: var(--text-primary, #1e293b);
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.section-title p {
+  color: var(--text-muted, #94a3b8);
+  font-size: 13px;
+}
+
+.marker-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.marker-card,
+.interpretation-card,
+.rec-card {
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 20px;
+  background: var(--bg-card, #ffffff);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+}
+
+.marker-card {
+  min-height: 138px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 14px;
+  padding: 18px;
+  background: linear-gradient(180deg, var(--bg-card, #ffffff), #f8fafc);
+}
+
+.marker-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary, #3b82f6);
+  font-size: 17px;
+}
+
+.marker-card small {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-muted, #94a3b8);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.marker-card strong {
+  display: block;
+  color: var(--text-primary, #1e293b);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.marker-status {
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color, #e2e8f0);
+  background: var(--bg-tertiary, #f8fafc);
+  color: var(--text-secondary, #64748b);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.8fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.interpretation-card { padding: 22px; }
+
+.interpretation-card h4 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary, #1e293b);
+  font-size: 17px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.interpretation-card h4 svg { color: var(--primary, #3b82f6); }
+
+.interpretation-card p {
+  margin: 0;
+  padding: 18px;
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 16px;
+  background: var(--bg-tertiary, #f8fafc);
+  color: var(--text-secondary, #64748b);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.recommendations-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rec-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 156px;
+  padding: 20px;
+}
+
+.rec-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary, #1e293b);
+  font-size: 16px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.rec-card p {
+  flex-grow: 1;
+  color: var(--text-secondary, #64748b);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.rec-card .btn-premium {
+  width: fit-content;
+  min-height: 38px;
+  padding: 0 16px;
+  border-radius: 10px;
+  font-size: 12px;
+}

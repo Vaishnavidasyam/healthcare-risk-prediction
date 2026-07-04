@@ -1,341 +1,216 @@
-// frontend/src/pages/RecommendationsPage.jsx
-
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 import {
+  FaUtensils,
   FaHeartbeat,
   FaTint,
-  FaWalking,
-  FaAppleAlt,
-  FaBrain,
-  FaMoon,
-  FaWater,
-  FaDumbbell,
-  FaBed,
+  FaNotesMedical,
   FaCheckCircle,
-  FaArrowRight,
-  FaShieldAlt,
+  FaExclamationTriangle,
+  FaCalendarPlus,
+  FaFilePdf,
+  FaShoppingCart,
+  FaLightbulb,
+  FaUserMd,
+  FaChevronRight,
+  FaAppleAlt,
+  FaRunning,
+  FaCapsules
 } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import api from "../api/client";
+import { toast } from "react-hot-toast";
 
 import "./RecommendationsPage.css";
 
 const RecommendationsPage = () => {
+  const [activeTab, setActiveTab] = useState("diet");
+  const [dietPlan, setDietPlan] = useState(null);
+  const [specialists, setSpecialists] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedDisease, setSelectedDisease] = useState("heart");
+
+  useEffect(() => {
+    fetchInitialData();
+  }, [selectedDisease]);
+
+  const fetchInitialData = async () => {
+    try {
+      setLoading(true);
+      const [dietRes, doctorRes] = await Promise.all([
+        api.post("/premium/diet/plan", { disease_type: selectedDisease }),
+        api.post("/premium/doctors/recommendations", { conditions: [selectedDisease], health_score: 65 })
+      ]);
+      setDietPlan(dietRes.data.data.plan);
+      setSpecialists(doctorRes.data.data);
+    } catch (err) {
+      console.error("Error fetching recommendations:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDownloadPDF = async () => {
+    try {
+      toast.loading("Generating clinical case study...");
+      const summaryRes = await api.get("/health/dashboard-summary");
+      const res = await api.post("/premium/report/generate", {
+        health_score: summaryRes.data.health_score,
+        predictions: { heart: 0.65, diabetes: 0.22, kidney: 0.15 },
+        recommendations: summaryRes.data.top_recommendations
+      }, { responseType: 'blob' });
+      
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Health_Intelligence_Assessment.pdf');
+      document.body.appendChild(link);
+      link.click();
+      toast.dismiss();
+      toast.success("Assessment exported successfully.");
+    } catch (err) {
+      toast.dismiss();
+      toast.error("PDF generation failed.");
+    }
+  };
+
+  if (loading && !dietPlan) {
+    return (
+      <div className="rec-loading-premium">
+        <div className="loader-ring"></div>
+        <h2>Curating <span>Personalized Plan</span></h2>
+      </div>
+    );
+  }
+
   return (
-    <div className="recommendations-page">
-      {/* =========================================
-          HERO SECTION
-      ========================================= */}
-
-      <div className="recommendations-hero">
-        <div className="recommendations-hero-left">
-          <div className="recommendations-badge">
-            <FaBrain />
-            <span>AI Wellness Intelligence</span>
+    <div className="recommendations-enterprise-page">
+      {/* HEADER */}
+      <header className="rec-header-premium">
+        <div className="header-left">
+          <div className="rec-badge-enterprise">
+            <FaAppleAlt /> <span>Precision Lifestyle Guidance</span>
           </div>
-
-          <h1>
-            Personalized <span>Health Recommendations</span>
-          </h1>
-
-          <p>
-            AI-powered healthcare wellness recommendations designed to improve
-            heart health, diabetes prevention, kidney protection, nutrition,
-            fitness, sleep quality, and overall lifestyle balance.
-          </p>
-
-          <div className="recommendations-stats">
-            <div className="recommendation-stat-card">
-              <h2>98%</h2>
-              <span>AI Accuracy</span>
-            </div>
-
-            <div className="recommendation-stat-card">
-              <h2>24/7</h2>
-              <span>Health Monitoring</span>
-            </div>
-
-            <div className="recommendation-stat-card">
-              <h2>100+</h2>
-              <span>Health Insights</span>
-            </div>
-          </div>
+          <h1>Clinical <span>Health Planner</span></h1>
+          <p>Personalized nutrition, specialist referrals, and lifestyle protocols based on your AI risk profile.</p>
         </div>
-
-        <div className="recommendations-hero-right">
-          <div className="recommendation-glass-card">
-            <FaShieldAlt />
-
-            <h3>AI Health Assistant</h3>
-
-            <p>Smart healthcare wellness engine active.</p>
-
-            <div className="recommendation-live-status">
-              <span></span>
-              Personalized Insights Enabled
-            </div>
-          </div>
+        
+        <div className="header-right">
+          <button className="btn-premium btn-primary" onClick={handleDownloadPDF}>
+            <FaFilePdf /> Export Health Report
+          </button>
         </div>
+      </header>
+
+      {/* TABS */}
+      <div className="rec-tabs-premium glass-card">
+        <button className={activeTab === "diet" ? "active" : ""} onClick={() => setActiveTab("diet")}>
+          <FaUtensils /> AI Diet Protocol
+        </button>
+        <button className={activeTab === "specialists" ? "active" : ""} onClick={() => setActiveTab("specialists")}>
+          <FaUserMd /> Specialist Referrals
+        </button>
+        <button className={activeTab === "lifestyle" ? "active" : ""} onClick={() => setActiveTab("lifestyle")}>
+          <FaRunning /> Lifestyle Protocol
+        </button>
       </div>
 
-      {/* =========================================
-          RECOMMENDATIONS GRID
-      ========================================= */}
+      <div className="rec-viewport-premium">
+        <AnimatePresence mode="wait">
+          {activeTab === "diet" && (
+            <motion.div 
+              key="diet"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="diet-planner-layout"
+            >
+              <div className="diet-controls-bar glass-card">
+                <div className="focus-group">
+                  <span>Clinical Focus:</span>
+                  <select value={selectedDisease} onChange={(e) => setSelectedDisease(e.target.value)}>
+                    <option value="heart">Cardiovascular Health</option>
+                    <option value="diabetes">Metabolic Management</option>
+                    <option value="kidney">Renal Protection</option>
+                  </select>
+                </div>
+                <div className="ai-protocol-badge"><FaCheckCircle /> Evidence-Based Protocol v2.4</div>
+              </div>
 
-      <div className="recommendations-grid">
-        {/* HEART */}
+              <div className="diet-content-grid">
+                {/* MEALS */}
+                <div className="diet-card-main glass-card">
+                  <div className="card-header-flex">
+                    <h3><FaCalendarPlus /> Weekly Meal Sequence</h3>
+                  </div>
+                  <div className="meals-sequence-list">
+                    {Object.entries(dietPlan?.weekly_meals || {}).map(([cat, meals]) => (
+                      <div key={cat} className="meal-cat-block">
+                        <h4>{cat}</h4>
+                        <div className="meal-items-flex">
+                          {meals.map((m, i) => <div key={i} className="meal-tag">{m}</div>)}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-        <div className="recommendation-card">
-          <div className="recommendation-top">
-            <div className="recommendation-main-icon red">
-              <FaHeartbeat />
-            </div>
+                {/* SIDEBAR RECS */}
+                <div className="diet-side-column">
+                  <div className="side-rec-card glass-card shopping">
+                    <h3><FaShoppingCart /> Clinical Grocery List</h3>
+                    <div className="shopping-grid-premium">
+                      {Object.entries(dietPlan?.shopping_list || {}).map(([c, items]) => (
+                        <div key={c} className="shop-item-mini">
+                          <strong>{c}</strong>
+                          <p>{items.join(", ")}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-            <div className="recommendation-status">
-              <FaCheckCircle />
-              Active
-            </div>
-          </div>
+                  <div className="side-rec-card glass-card avoid">
+                    <h3><FaExclamationTriangle /> High-Risk Constraints</h3>
+                    <div className="avoid-stack">
+                      {dietPlan?.foods_to_avoid?.map((f, i) => (
+                        <div key={i} className="avoid-pill"><FaCheckCircle /> {f}</div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
-          <h3>Cardiovascular Health</h3>
-
-          <p>
-            Improve heart wellness with regular exercise, blood pressure
-            tracking, and stress management techniques.
-          </p>
-
-          <ul className="recommendation-points">
-            <li>
-              <FaArrowRight />
-              30 minutes aerobic exercise daily
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Monitor blood pressure weekly
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Reduce processed food intake
-            </li>
-          </ul>
-        </div>
-
-        {/* DIABETES */}
-
-        <div className="recommendation-card">
-          <div className="recommendation-top">
-            <div className="recommendation-main-icon blue">
-              <FaTint />
-            </div>
-
-            <div className="recommendation-status">
-              <FaCheckCircle />
-              Recommended
-            </div>
-          </div>
-
-          <h3>Diabetes Prevention</h3>
-
-          <p>
-            Maintain balanced glucose levels through healthy eating habits and
-            smart lifestyle management.
-          </p>
-
-          <ul className="recommendation-points">
-            <li>
-              <FaArrowRight />
-              Reduce excess sugar consumption
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Monitor glucose levels regularly
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Include fiber-rich foods in meals
-            </li>
-          </ul>
-        </div>
-
-        {/* NUTRITION */}
-
-        <div className="recommendation-card">
-          <div className="recommendation-top">
-            <div className="recommendation-main-icon green">
-              <FaAppleAlt />
-            </div>
-
-            <div className="recommendation-status">
-              <FaCheckCircle />
-              Healthy
-            </div>
-          </div>
-
-          <h3>Healthy Nutrition</h3>
-
-          <p>
-            Maintain kidney-friendly nutrition and balanced hydration to support
-            long-term health.
-          </p>
-
-          <ul className="recommendation-points">
-            <li>
-              <FaArrowRight />
-              Consume fresh fruits and vegetables
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Drink adequate water daily
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Limit excessive sodium intake
-            </li>
-          </ul>
-        </div>
-
-        {/* FITNESS */}
-
-        <div className="recommendation-card">
-          <div className="recommendation-top">
-            <div className="recommendation-main-icon purple">
-              <FaWalking />
-            </div>
-
-            <div className="recommendation-status">
-              <FaCheckCircle />
-              Tracking
-            </div>
-          </div>
-
-          <h3>Daily Physical Activity</h3>
-
-          <p>
-            Improve overall wellness through consistent movement, exercise, and
-            healthy daily habits.
-          </p>
-
-          <ul className="recommendation-points">
-            <li>
-              <FaArrowRight />
-              Walk at least 8,000 steps daily
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Include stretching exercises
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Maintain active lifestyle routines
-            </li>
-          </ul>
-        </div>
-
-        {/* HYDRATION */}
-
-        <div className="recommendation-card">
-          <div className="recommendation-top">
-            <div className="recommendation-main-icon cyan">
-              <FaWater />
-            </div>
-
-            <div className="recommendation-status">
-              <FaCheckCircle />
-              Important
-            </div>
-          </div>
-
-          <h3>Hydration Management</h3>
-
-          <p>
-            Proper hydration supports kidney function, metabolism, and overall
-            body performance.
-          </p>
-
-          <ul className="recommendation-points">
-            <li>
-              <FaArrowRight />
-              Drink 2–3 liters of water daily
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Avoid excessive sugary beverages
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Maintain electrolyte balance
-            </li>
-          </ul>
-        </div>
-
-        {/* SLEEP */}
-
-        <div className="recommendation-card">
-          <div className="recommendation-top">
-            <div className="recommendation-main-icon orange">
-              <FaBed />
-            </div>
-
-            <div className="recommendation-status">
-              <FaCheckCircle />
-              Essential
-            </div>
-          </div>
-
-          <h3>Sleep & Recovery</h3>
-
-          <p>
-            Healthy sleep patterns improve immunity, cardiovascular health, and
-            mental wellness.
-          </p>
-
-          <ul className="recommendation-points">
-            <li>
-              <FaArrowRight />
-              Sleep 7–8 hours consistently
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Reduce screen time before bed
-            </li>
-
-            <li>
-              <FaArrowRight />
-              Maintain a regular sleep schedule
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      {/* =========================================
-          BOTTOM SECTION
-      ========================================= */}
-
-      <div className="recommendations-bottom">
-        <div className="wellness-card">
-          <div className="wellness-icon">
-            <FaDumbbell />
-          </div>
-
-          <div>
-            <h2>AI Wellness Tracking</h2>
-
-            <p>
-              Continue following AI-driven wellness recommendations to improve
-              your overall healthcare profile and reduce disease risks.
-            </p>
-          </div>
-        </div>
+          {activeTab === "specialists" && (
+            <motion.div 
+              key="specialists"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="specialists-layout-premium"
+            >
+              <div className="specialists-grid-premium">
+                {specialists.map((s, i) => (
+                  <div key={i} className="doctor-card-premium glass-card">
+                    <div className="doc-avatar-box">
+                      <FaUserMd />
+                      <div className="doc-verified"><FaCheckCircle /></div>
+                    </div>
+                    <div className="doc-info-premium">
+                      <span className={`urgency-label ${s.urgency?.toLowerCase()}`}>{s.urgency} Priority</span>
+                      <h3>{s.specialist}</h3>
+                      <p className="doc-desc">{s.description}</p>
+                      <div className="doc-reason-box">
+                        <strong>Protocol Reason:</strong>
+                        <p>{s.reason}</p>
+                      </div>
+                      <button className="btn-premium btn-primary full-width">Initialize Consultation</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

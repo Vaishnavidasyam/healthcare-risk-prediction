@@ -1,0 +1,115 @@
+/* frontend/src/components/SHAPVisualization.css */
+
+.shap-viz-wrapper {
+  margin-top: 32px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.header-icon {
+  font-size: 24px;
+  color: var(--medical-blue);
+  background: var(--medical-blue-subtle);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.header-text h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.header-text p {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin: 4px 0 0 0;
+}
+
+.meta {
+  background: var(--bg-secondary);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* Features Grid */
+.features-grid-premium {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.feature-card.compact {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  transition: transform 0.2s ease;
+}
+
+.feature-card.compact:hover {
+  transform: translateY(-2px);
+  border-color: var(--medical-blue);
+}
+
+.feature-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rank-badge {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--medical-blue);
+  background: var(--medical-blue-subtle);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.feature-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  flex: 1;
+}
+
+.feature-val { 
+  font-size: 14px; 
+  font-weight: 700; 
+  color: var(--text-primary); 
+}
+
+.contribution-compact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.contribution-compact .value { font-weight: 800; min-width: 30px; color: var(--medical-blue); }
+
+.progress-bar-track {
+  height: 6px;
+  background: var(--bg-secondary);
+  border-radius: 3px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 3px;
+}

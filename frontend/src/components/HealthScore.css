@@ -1,0 +1,161 @@
+/* frontend/src/components/HealthScore.css */
+/* Premium Health Score Engine Styles */
+
+.health-score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  text-align: center;
+}
+
+/* Score Ring Wrapper */
+.score-ring-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-ring-wrapper .CircularProgressbar {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.score-ring-wrapper .CircularProgressbar-text {
+  fill: var(--text-primary);
+  font-weight: 900;
+  font-family: "Inter", sans-serif;
+}
+
+.score-ring-wrapper .CircularProgressbar-trail {
+  stroke: var(--border-color);
+}
+
+/* Glow Effect */
+.score-ring-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  animation: pulse-glow 3s infinite ease-in-out;
+}
+
+/* Score Details */
+.score-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.grade-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.grade-badge.excellent,
+.grade-badge.a,
+.grade-badge.a-plus {
+  background: var(--status-success-bg);
+  color: var(--status-success);
+}
+
+.grade-badge.good,
+.grade-badge.b,
+.grade-badge.b-plus {
+  background: var(--status-info-bg);
+  color: var(--status-info);
+}
+
+.grade-badge.moderate,
+.grade-badge.c {
+  background: var(--status-warning-bg);
+  color: var(--status-warning);
+}
+
+.grade-badge.high-risk,
+.grade-badge.d,
+.grade-badge.f {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+}
+
+.grade-badge.awaiting-assessment {
+  background: var(--medical-blue-subtle);
+  color: var(--medical-blue-light);
+  border: 1px solid var(--medical-blue-glow);
+}
+
+/* Trend Indicator */
+.trend-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.trend-indicator.positive {
+  background: var(--status-success-bg);
+  color: var(--status-success);
+}
+
+.trend-indicator.negative {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+}
+
+.trend-indicator.neutral {
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+}
+
+.trend-icon {
+  font-size: 10px;
+}
+
+.trend-icon.positive {
+  color: var(--status-success);
+}
+
+.trend-icon.negative {
+  color: var(--status-danger);
+}
+
+.trend-icon.neutral {
+  color: var(--text-muted);
+}
+
+/* Score Interpretation */
+.score-interpretation {
+  font-size: 13px;
+  color: var(--text-secondary);
+  max-width: 250px;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .health-score-container {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .score-interpretation {
+    font-size: 12px;
+  }
+}

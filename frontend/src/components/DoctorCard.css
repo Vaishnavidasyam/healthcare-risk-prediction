@@ -1,0 +1,251 @@
+/* frontend/src/components/DoctorCard.css */
+/* Premium Doctor Recommendation Card Styles */
+
+.doctor-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 300px;
+  max-width: 380px;
+}
+
+/* Doctor Header */
+.doctor-header {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* Avatar */
+.doctor-avatar {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.doctor-avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+}
+
+.avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  background: var(--gradient-primary);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.avatar-placeholder FaUserMd {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+/* Availability Badge */
+.availability-badge {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.availability-badge.available {
+  background: var(--status-success);
+  color: white;
+}
+
+.availability-badge.busy {
+  background: var(--status-warning);
+  color: white;
+}
+
+.availability-badge.unavailable {
+  background: var(--status-danger);
+  color: white;
+}
+
+.availability-badge .dot {
+  width: 6px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 50%;
+  animation: blink 2s infinite;
+}
+
+/* Doctor Info */
+.doctor-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.doctor-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.doctor-qualification {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.doctor-specialty,
+.doctor-experience {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.doctor-specialty svg,
+.doctor-experience svg {
+  color: var(--medical-blue);
+  font-size: 12px;
+}
+
+/* Rating */
+.doctor-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.rating-stars svg {
+  font-size: 14px;
+}
+
+.rating-count {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Location */
+.doctor-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.doctor-location svg {
+  color: var(--status-danger);
+  font-size: 12px;
+}
+
+/* Consultation Fee */
+.consultation-fee {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+}
+
+.fee-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.fee-amount {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--medical-blue);
+}
+
+/* Action Buttons */
+.doctor-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.doctor-actions .btn-premium {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px 16px;
+  font-size: 13px;
+}
+
+/* Doctor List */
+.doctor-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 20px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .doctor-card {
+    min-width: unset;
+    max-width: unset;
+  }
+
+  .doctor-list {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-actions {
+    flex-direction: column;
+  }
+
+  .doctor-actions .btn-premium {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .doctor-card {
+    padding: 20px;
+  }
+
+  .doctor-header {
+    gap: 12px;
+  }
+
+  .doctor-avatar img,
+  .avatar-placeholder {
+    width: 60px;
+    height: 60px;
+  }
+
+  .doctor-name {
+    font-size: 16px;
+  }
+}

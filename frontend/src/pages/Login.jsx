@@ -1,386 +1,116 @@
 // frontend/src/pages/Login.jsx
 
-import React, { useEffect, useState } from "react";
-
-import {
-  FaEnvelope,
-  FaLock,
-  FaShieldAlt,
-  FaArrowRight,
-  FaUserMd,
-  FaCheckCircle,
-  FaExclamationTriangle,
-  FaMoon,
-  FaSun,
-  FaChartLine,
-  FaHome,
-  FaUserPlus,
-} from "react-icons/fa";
-
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import api from "../api/client";
-
+import { toast } from "react-hot-toast";
 import "./Auth.css";
 
-import healthScreening from "../assets/health-screening.png";
-
-import healthScreeningDark from "../assets/health-screening1.png";
-
-const Login = ({ onLogin, goToRegister, goHome }) => {
-  // ======================================================
-  // STATES
-  // ======================================================
-
-  const [email, setEmail] = useState("test@example.com");
-
-  const [password, setPassword] = useState("test123");
-
-  const [message, setMessage] = useState("");
-
+const Login = () => {
+  const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const [theme, setTheme] = useState(
-    localStorage.getItem("auth-theme") || "dark",
-  );
-
-  // ======================================================
-  // THEME
-  // ======================================================
-
-  useEffect(() => {
-    document.body.classList.remove("auth-dark", "auth-light");
-
-    document.body.classList.add(theme === "dark" ? "auth-dark" : "auth-light");
-
-    localStorage.setItem("auth-theme", theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-
-  // ======================================================
-  // LOGIN
-  // ======================================================
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
-
-    setMessage("");
-
     try {
-      const res = await api.post("/auth/login", {
-        email,
-        password,
-      });
+      const res = await api.post("/auth/login", form);
+      localStorage.setItem("token", res.data.access_token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      toast.success("Welcome back to SmartMed AI");
 
-      const token = res.data.access_token;
-
+      // Role-based redirect
       const user = res.data.user;
-
-      localStorage.setItem("token", token);
-
-      localStorage.setItem("user", JSON.stringify(user));
-
-      setMessage("success");
-
-      if (onLogin) {
-        onLogin(user);
+      if (user?.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/dashboard");
       }
     } catch (err) {
-      const backendMsg = err.response?.data?.message || err.response?.data?.msg;
-
-      setMessage(backendMsg || "Login failed");
+      toast.error(err.response?.data?.message || "Authentication failed.");
     } finally {
       setLoading(false);
     }
   };
 
-  // ======================================================
-  // DEMO ACCOUNT
-  // ======================================================
-
-  const fillTestUser = () => {
-    setEmail("test@example.com");
-
-    setPassword("test123");
-  };
-
-  // ======================================================
-  // UI
-  // ======================================================
-
   return (
-    <div className="auth-page">
-      {/* ======================================================
-          THEME TOGGLE
-      ====================================================== */}
+    <div className="auth-page-enterprise">
+      <div className="auth-glow-1"></div>
+      <div className="auth-glow-2"></div>
 
-      <button className="theme-toggle-btn" onClick={toggleTheme}>
-        {theme === "dark" ? <FaSun /> : <FaMoon />}
-      </button>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="auth-card-premium glass-card"
+      >
+        <div className="auth-header">
+          {/* SVG icon instead of react-icons to avoid import issues */}
+          <div className="auth-logo">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+              <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" />
+            </svg>
+          </div>
+          <h1>
+            Clinical <span>Sign In</span>
+          </h1>
+          <p>Access your secure healthcare intelligence dashboard.</p>
+        </div>
 
-      {/* ======================================================
-          LEFT SECTION
-      ====================================================== */}
-
-      <div className="auth-left">
-        {/* ======================================================
-            BRAND
-        ====================================================== */}
-
-        <div className="auth-brand">
-          {/* LOGO */}
-
-          <div className="auth-brand-logo">
-            <img
-              src={theme === "dark" ? healthScreeningDark : healthScreening}
-              alt="SmartMed Analytics"
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="auth-group">
+            <label>Clinical Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="clinical@smartmed.ai"
+              value={form.email}
+              onChange={handleChange}
+              required
             />
           </div>
 
-          {/* TEXT */}
-
-          <div className="auth-brand-text">
-            <h1>SmartMed Analytics</h1>
-
-            <p>AI-Powered Healthcare Analytics</p>
-          </div>
-        </div>
-
-        {/* ======================================================
-            HERO
-        ====================================================== */}
-
-        <div className="auth-left-content">
-          <div className="hero-badge">
-            <FaChartLine />
-
-            <span>AI Healthcare Analytics</span>
+          <div className="auth-group">
+            <label>Secure Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
           </div>
 
-          <h2>Predict Diseases with Intelligent Healthcare AI</h2>
+          <div className="auth-extra">
+            <label className="checkbox-container">
+              <input type="checkbox" />
+              <span className="checkmark"></span>
+              Remember for 30 days
+            </label>
+            <a href="#">Forgot password?</a>
+          </div>
 
+          <button
+            type="submit"
+            className="btn-premium btn-primary large auth-btn"
+            disabled={loading}
+          >
+            {loading ? "Authenticating..." : "Authorize Access"}
+          </button>
+        </form>
+
+        <div className="auth-footer">
           <p>
-            Securely analyze patient health indicators and get predictive
-            insights for heart disease, diabetes, and kidney disease.
+            New to SmartMed?{" "}
+            <Link to="/register">Create Enterprise Account</Link>
           </p>
-
-          {/* ======================================================
-              FEATURES
-          ====================================================== */}
-
-          <div className="auth-feature-list">
-            {/* FEATURE */}
-
-            <div className="auth-feature-item">
-              <div className="feature-icon">
-                <FaShieldAlt />
-              </div>
-
-              <div>
-                <h4>Secure Medical Data</h4>
-
-                <p>Your healthcare data is encrypted and securely protected.</p>
-              </div>
-            </div>
-
-            {/* FEATURE */}
-
-            <div className="auth-feature-item">
-              <div className="feature-icon">
-                <FaUserMd />
-              </div>
-
-              <div>
-                <h4>AI Disease Prediction</h4>
-
-                <p>Smart healthcare risk prediction powered by AI models.</p>
-              </div>
-            </div>
-
-            {/* FEATURE */}
-
-            <div className="auth-feature-item">
-              <div className="feature-icon">
-                <FaCheckCircle />
-              </div>
-
-              <div>
-                <h4>Personalized Insights</h4>
-
-                <p>Get predictive analytics and health recommendations.</p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-
-      {/* ======================================================
-          RIGHT SECTION
-      ====================================================== */}
-
-      <div className="auth-right">
-        <div className="auth-card premium-auth-card">
-          {/* ======================================================
-              HEADER
-          ====================================================== */}
-
-          <div className="auth-card-header">
-            <h2>Welcome Back</h2>
-
-            <p>Login to continue your healthcare analytics journey.</p>
-          </div>
-
-          {/* ======================================================
-              DEMO ACCOUNT
-          ====================================================== */}
-
-          {/* ======================================================
-              FORM
-          ====================================================== */}
-
-          <form onSubmit={handleSubmit} className="auth-form">
-            {/* EMAIL */}
-
-            <div className="auth-input-group">
-              <label>Email Address</label>
-
-              <div className="auth-input-wrapper">
-                <FaEnvelope />
-
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-
-            {/* PASSWORD */}
-
-            <div className="auth-input-group">
-              <label>Password</label>
-
-              <div className="auth-input-wrapper">
-                <FaLock />
-
-                <input
-                  type="password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-
-            {/* OPTIONS */}
-
-            <div className="auth-options">
-              <label className="remember-me">
-                <input type="checkbox" />
-
-                <span>Remember me</span>
-              </label>
-
-              <button type="button" className="forgot-password">
-                Forgot Password?
-              </button>
-            </div>
-
-            {/* SUBMIT */}
-
-            <button
-              type="submit"
-              className="auth-submit-btn"
-              disabled={loading}
-            >
-              {loading ? (
-                "Signing In..."
-              ) : (
-                <>
-                  Login to Dashboard
-                  <FaArrowRight />
-                </>
-              )}
-            </button>
-          </form>
-
-          {/* ======================================================
-              ERROR
-          ====================================================== */}
-
-          {message && message !== "success" && (
-            <div className="auth-error">
-              <FaExclamationTriangle />
-
-              <span>{message}</span>
-            </div>
-          )}
-
-          {/* ======================================================
-              SUCCESS
-          ====================================================== */}
-
-          {message === "success" && (
-            <div className="auth-success">
-              <FaCheckCircle />
-
-              <span>Login successful!</span>
-            </div>
-          )}
-
-          {/* ======================================================
-              FOOTER
-          ====================================================== */}
-
-          <div className="auth-footer">
-            <p>SmartMed Analytics © 2026</p>
-          </div>
-
-          {/* ======================================================
-              BOTTOM SECTION
-          ====================================================== */}
-
-          <div className="auth-bottom-section">
-            <div>
-              <h4>New to the platform?</h4>
-
-              <p>
-                Create your account and start using AI healthcare analytics.
-              </p>
-            </div>
-
-            <div className="auth-bottom-buttons">
-              {/* HOME */}
-
-              <button
-                type="button"
-                className="auth-outline-btn"
-                onClick={goHome}
-              >
-                <FaHome />
-                Back Home
-              </button>
-
-              {/* REGISTER */}
-
-              <button
-                type="button"
-                className="auth-gradient-btn"
-                onClick={goToRegister}
-              >
-                <FaUserPlus />
-                Register
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

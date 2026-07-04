@@ -1,0 +1,69 @@
+/* frontend/src/components/HealthTimeline.css */
+
+.timeline-container-premium {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.timeline-scroll-premium {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.timeline-event-enterprise {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--medical-blue);
+  flex-shrink: 0;
+}
+
+.event-line {
+  width: 2px;
+  flex: 1;
+  background: var(--border-color);
+  margin-top: 4px;
+}
+
+.event-content h4 { margin: 0 0 4px 0; font-size: 14px; }
+.event-content p { margin: 0; font-size: 13px; color: var(--text-muted); }
+.event-time { font-size: 11px; color: var(--medical-blue); font-weight: 700; }
+
+.setup-step {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.setup-step span {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+}
+
+.setup-step.complete span { color: var(--status-success); }
+.setup-step.active span { color: var(--medical-blue); border: 2px solid var(--medical-blue); }

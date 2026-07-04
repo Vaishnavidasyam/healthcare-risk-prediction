@@ -1,0 +1,60 @@
+/* frontend/src/components/EmergencyAlert.css */
+
+.emergency-alert {
+  padding: 32px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+  border: 1px solid #f87171;
+  color: #991b1b;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 10px 20px rgba(220, 38, 38, 0.1);
+  animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.alert-icon {
+  font-size: 36px;
+  color: #b91c1c;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.alert-content {
+  flex: 1;
+}
+
+.alert-title {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.alert-message {
+  margin: 0 0 16px 0;
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.alert-action-box {
+  background: rgba(153, 27, 27, 0.1);
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(153, 27, 27, 0.2);
+}
+
+.alert-action-box p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  font-weight: 600;
+}

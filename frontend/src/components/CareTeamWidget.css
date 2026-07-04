@@ -1,0 +1,56 @@
+/* frontend/src/components/CareTeamWidget.css */
+
+.care-team-card {
+  height: 100%;
+}
+
+.doctors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.doctor-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+}
+
+.doc-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--medical-blue-subtle);
+  color: var(--medical-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doc-info {
+  flex: 1;
+}
+
+.doc-info strong { display: block; font-size: 14px; color: var(--text-primary); }
+.doc-info span { font-size: 12px; color: var(--text-muted); }
+
+.doc-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-icon {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.btn-icon:hover { color: var(--medical-blue); }

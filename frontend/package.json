@@ -1,7 +1,8 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "smartmed-analytics-platform",
+  "version": "2.0.0",
   "private": true,
+  "description": "Enterprise-grade AI Healthcare Intelligence Platform",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
@@ -10,16 +11,18 @@
     "axios": "^1.16.1",
     "framer-motion": "^12.40.0",
     "html2canvas": "^1.4.1",
-    "jspdf": "^4.2.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^5.0.8",
     "lottie-react": "^2.4.1",
-    "react": "^19.2.6",
+    "react": "^19.1.0",
     "react-circular-progressbar": "^2.2.0",
-    "react-dom": "^19.2.6",
+    "react-dom": "^19.1.0",
     "react-hot-toast": "^2.6.0",
     "react-icons": "^5.6.0",
     "react-loading-skeleton": "^3.5.0",
+    "react-router-dom": "^7.16.0",
     "react-scripts": "5.0.1",
-    "recharts": "^3.8.1",
+    "recharts": "^3.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

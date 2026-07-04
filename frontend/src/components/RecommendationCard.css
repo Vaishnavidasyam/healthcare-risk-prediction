@@ -1,0 +1,207 @@
+/* frontend/src/components/RecommendationCard.css */
+/* Premium Health Recommendation Card Styles */
+
+.recommendation-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  cursor: pointer;
+}
+
+/* Header */
+.rec-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.rec-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.rec-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.rec-priority {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.rec-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.rec-completed-badge {
+  width: 32px;
+  height: 32px;
+  background: var(--status-success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Description */
+.rec-description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Target */
+.rec-target {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border-radius: 10px;
+}
+
+.target-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.target-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--medical-blue);
+}
+
+/* Progress */
+.rec-progress {
+  margin-top: 4px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progress-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.progress-value {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background: var(--bg-secondary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* Action Button */
+.rec-action-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.rec-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+/* Completed State */
+.recommendation-card.completed {
+  opacity: 0.7;
+}
+
+.recommendation-card.completed:hover {
+  opacity: 1;
+}
+
+.recommendation-card.completed .rec-description {
+  text-decoration: line-through;
+}
+
+/* Recommendation List */
+.recommendation-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .recommendation-card {
+    padding: 20px;
+  }
+
+  .recommendation-list {
+    grid-template-columns: 1fr;
+  }
+
+  .rec-card-header {
+    gap: 12px;
+  }
+
+  .rec-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .rec-title {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .recommendation-card {
+    padding: 16px;
+  }
+
+  .rec-completed-badge {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+}

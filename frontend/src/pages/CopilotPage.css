@@ -1,0 +1,434 @@
+/* frontend/src/pages/CopilotPage.css */
+
+.copilot-enterprise-page {
+  height: calc(100vh - 80px);
+  padding: 24px;
+  background-color: var(--bg-primary);
+}
+
+.copilot-layout-premium {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+  height: 100%;
+}
+
+/* SIDEBAR */
+.copilot-history-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.sidebar-top-actions {
+  margin-bottom: 8px;
+}
+
+.chat-sessions-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 8px;
+}
+
+.sidebar-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--text-muted);
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.session-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative; /* Added for delete btn positioning */
+}
+
+.delete-session-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.session-pill:hover .delete-session-btn {
+  opacity: 1;
+}
+
+.delete-session-btn:hover {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+}
+
+.session-pill svg {
+  border-color: var(--medical-blue);
+  background: var(--bg-tertiary);
+}
+
+.session-pill.active {
+  background: var(--medical-blue-subtle);
+  border-color: var(--medical-blue);
+}
+
+.session-pill svg {
+  font-size: 18px;
+  color: var(--medical-blue);
+}
+
+.s-info strong {
+  display: block;
+  font-size: 13px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.s-info span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.copilot-compliance-card {
+  padding: 16px;
+  background: var(--bg-tertiary);
+  border-radius: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px solid var(--border-color);
+}
+
+.copilot-compliance-card svg {
+  color: var(--medical-blue);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.copilot-compliance-card p {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* MAIN VIEWPORT */
+.chat-viewport-premium {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-premium);
+}
+
+.chat-header-premium {
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.ai-profile-flex {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ai-avatar-glow {
+  width: 44px;
+  height: 44px;
+  background: var(--gradient-primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+}
+
+.status-dot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  background: var(--status-success);
+  border: 2px solid var(--bg-secondary);
+  border-radius: 50%;
+}
+
+.ai-meta h2 {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.ai-meta h2 span { color: var(--medical-blue); }
+
+.clinical-badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--status-success);
+  text-transform: uppercase;
+}
+
+.tool-chip {
+  padding: 6px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.messages-container-premium {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.message-bubble-row {
+  display: flex;
+  gap: 16px;
+  max-width: 85%;
+}
+
+.message-bubble-row.user {
+  flex-direction: row-reverse;
+  align-self: flex-end;
+}
+
+.bubble-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+.assistant .bubble-avatar {
+  background: var(--medical-blue-subtle);
+  color: var(--medical-blue);
+  border-color: var(--medical-blue-glow);
+}
+
+.bubble-content-box {
+  padding: 16px 20px;
+  border-radius: 18px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+}
+
+.user .bubble-content-box {
+  background: var(--medical-blue);
+  border-color: var(--medical-blue);
+  color: white;
+}
+
+.bubble-text {
+  font-size: 15px;
+  line-height: 1.7;
+  word-break: break-word;
+}
+
+.clinical-list-item {
+  line-height: 1.6;
+}
+
+.clinical-list-item span:first-child {
+  font-family: monospace;
+  font-size: 18px;
+}
+
+.bubble-text b, .bubble-text strong {
+  font-weight: 800;
+  color: var(--medical-blue-light);
+}
+
+.user .bubble-text b, .user .bubble-text strong {
+  color: white;
+  text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.bubble-footer {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.voice-out-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.typing-indicator-premium {
+  display: flex;
+  gap: 4px;
+  padding: 12px 20px;
+  background: var(--bg-tertiary);
+  border-radius: 14px;
+  width: fit-content;
+}
+
+.typing-indicator-premium .dot {
+  width: 6px;
+  height: 6px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  animation: blink 1.4s infinite;
+}
+
+.typing-indicator-premium .dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator-premium .dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* INPUT AREA */
+.chat-input-area-premium {
+  padding: 24px 32px;
+  border-top: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.suggested-prompts {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.suggested-prompts button {
+  padding: 8px 16px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.suggested-prompts button:hover {
+  border-color: var(--medical-blue);
+  color: var(--medical-blue);
+}
+
+.clinical-input-form {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background: var(--bg-tertiary);
+  padding: 8px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
+}
+
+.clinical-input-form:focus-within {
+  border-color: var(--medical-blue);
+}
+
+.clinical-input-form input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  padding: 12px;
+  font-size: 14px;
+  outline: none;
+}
+
+.input-tool-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.input-tool-btn:hover {
+  color: var(--medical-blue);
+  border-color: var(--medical-blue);
+}
+
+.active-voice {
+  background: var(--status-danger-bg);
+  color: var(--status-danger) !important;
+  border-color: var(--status-danger) !important;
+}
+
+.send-clinical-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.send-clinical-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.send-clinical-btn:not(:disabled):hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+}
