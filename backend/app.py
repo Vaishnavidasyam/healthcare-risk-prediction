@@ -1,10 +1,15 @@
 import os
 import sys
+import joblib
+import pandas as pd
+import numpy as np
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_pymongo import PyMongo
 from config import Config, config
+from datetime import datetime
+from werkzeug.security import generate_password_hash
 
 BASE_DIR = os.path.dirname(__file__)  # backend/
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, ".."))
@@ -164,6 +169,57 @@ def create_app(config_name='development'):
     def internal_error(error):
         return jsonify({'error': 'Internal server error', 'message': str(error)}), 500
     
+    with app.app_context():
+        db = mongo.db
+        users_col = db["users"]
+
+        if users_col.count_documents({}) == 0:
+            print("Seeding default users...")
+            default_users = [
+                {"email": "admin@smartmed.ai", "password": "admin123", "role": "admin", "name": "Admin"},
+                {"email": "doctor@smartmed.ai", "password": "doctor123", "role": "doctor", "name": "Dr. Default"},
+                {"email": "patient@smartmed.ai", "password": "patient123", "role": "patient", "name": "Patient"},
+            ]
+            for u in default_users:
+                if not users_col.find_one({"email": u["email"]}):
+                    users_col.insert_one({
+                        "email": u["email"],
+                        "password_hash": generate_password_hash(u["password"]),
+                        "role": u["role"],
+                        "name": u["name"],
+                        "created_at": datetime.utcnow(),
+                    })
+            print(f"Seeded {users_col.count_documents({})} users")
+
+        models_dir = os.path.join(PROJECT_ROOT, "models")
+        os.makedirs(models_dir, exist_ok=True)
+        all_present = True
+        for model_name in ["heart_pipeline.pkl", "diabetes_pipeline.pkl", "kidney_pipeline.pkl"]:
+            if not os.path.exists(os.path.join(models_dir, model_name)):
+                all_present = False
+                break
+        if not all_present:
+            print("ML models missing, training on startup...")
+            try:
+                from ml.train_models import load_dataset, train_model
+                dataset_config = [
+                    (os.path.join(PROJECT_ROOT, "datasets", "heart.csv"), "target", "heart"),
+                    (os.path.join(PROJECT_ROOT, "datasets", "diabetes.csv"), "Outcome", "diabetes"),
+                    (os.path.join(PROJECT_ROOT, "datasets", "kidney_disease.csv"), "classification", "kidney"),
+                ]
+                for path, target, name in dataset_config:
+                    if os.path.exists(path):
+                        print(f"Training {name} model...")
+                        X, y, features = load_dataset(path, target)
+                        train_model(X, y, name, features)
+                    else:
+                        print(f"Dataset not found: {path}")
+                print("Model training complete")
+            except Exception as e:
+                print(f"Error training models: {e}")
+        else:
+            print("All ML models present")
+
     return app
 
 # Add this line so Gunicorn can find the app!

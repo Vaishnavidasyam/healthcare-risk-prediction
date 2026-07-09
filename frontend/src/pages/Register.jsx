@@ -79,6 +79,7 @@ const Register = () => {
               placeholder="john@hospital.com"
               value={form.email}
               onChange={handleChange}
+              autoComplete="email"
               required
             />
           </div>
@@ -92,6 +93,7 @@ const Register = () => {
               placeholder="••••••••"
               value={form.password}
               onChange={handleChange}
+              autoComplete="new-password"
               required
             />
           </div>

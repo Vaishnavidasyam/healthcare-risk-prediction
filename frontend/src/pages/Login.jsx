@@ -70,6 +70,7 @@ const Login = () => {
               placeholder="clinical@smartmed.ai"
               value={form.email}
               onChange={handleChange}
+              autoComplete="email"
               required
             />
           </div>
@@ -82,6 +83,7 @@ const Login = () => {
               placeholder="••••••••"
               value={form.password}
               onChange={handleChange}
+              autoComplete="current-password"
               required
             />
           </div>

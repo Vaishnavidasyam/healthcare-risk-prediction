@@ -7,8 +7,6 @@ __pycache__/
 venv/
 .venv/
 
-# Models
-models/*.pkl
 
 # Environment
 .env
