@@ -44,10 +44,7 @@ matplotlib==3.8.2
 
 # Report Generation
 ReportLab==4.0.7
-reportlab-platypus==0.4.5
-
-# Email & Notifications
-python-mailgun==1.0
+ 
 
 # Utilities
 pyyaml==6.0.1
