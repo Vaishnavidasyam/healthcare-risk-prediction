@@ -152,9 +152,11 @@ def create_app(config_name='development'):
     def internal_error(error):
         return jsonify({'error': 'Internal server error', 'message': str(error)}), 500
     
-    return app
+        return app
+
+# Add this line so Gunicorn can find the app!
+app = create_app(os.getenv('FLASK_ENV', 'production'))
 
 if __name__ == "__main__":
-    app = create_app()
     # On Python 3.14+ (experimental), use_reloader=False prevents socket errors
     app.run(debug=True, threaded=True, use_reloader=False)
