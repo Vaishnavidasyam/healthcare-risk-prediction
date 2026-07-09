@@ -1,8 +1,5 @@
 import os
 import sys
-import joblib
-import pandas as pd
-import numpy as np
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
