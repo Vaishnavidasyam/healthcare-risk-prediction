@@ -4,6 +4,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_pymongo import PyMongo
+from pymongo import MongoClient
 from config import Config, config
 from datetime import datetime
 from werkzeug.security import generate_password_hash
@@ -47,6 +48,7 @@ def create_app(config_name='development'):
     # Initialize extensions
     JWTManager(app)
     mongo = PyMongo(app)
+    pymongo_client = MongoClient(Config.MONGO_URI)
     
     # Global CORS headers - handle preflight and all requests
     @app.after_request
@@ -77,7 +79,7 @@ def create_app(config_name='development'):
         }), 422
     
     # Initialize services with database connection
-    db = mongo.db
+    db = pymongo_client[Config.DATABASE_NAME]
     
     # Initialize all services
     health_score_service = HealthScoreService(db)
@@ -166,13 +168,13 @@ def create_app(config_name='development'):
     def internal_error(error):
         return jsonify({'error': 'Internal server error', 'message': str(error)}), 500
     
-    # Seed default users on first successful MongoDB request
+    # Seed default users on first request
     @app.before_request
     def seed_on_first_request():
         if not getattr(app, '_sm_seeded', False):
             app._sm_seeded = True
             try:
-                mongo_db = mongo.db
+                mongo_db = pymongo_client[Config.DATABASE_NAME]
                 if mongo_db is not None:
                     users_col = mongo_db["users"]
                     if users_col.count_documents({}) == 0:
