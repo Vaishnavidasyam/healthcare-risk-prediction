@@ -48,7 +48,7 @@ class Config:
     MODERATE_RISK_THRESHOLD = 0.40
     
     # CORS Configuration
-    CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
+    CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:3000,https://healthcare-risk-prediction.vercel.app,https://healthcare-risk-prediction-j6g4murct.vercel.app").split(",")
     
     # Email Configuration (for alerts)
     MAIL_SERVER = os.getenv("MAIL_SERVER")
