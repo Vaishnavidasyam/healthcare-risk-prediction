@@ -6,6 +6,10 @@ class BaseService:
     """Base service class with common functionality"""
     
     def __init__(self, db):
+        if db is None:
+            from pymongo import MongoClient
+            from config import Config
+            db = MongoClient(Config.MONGO_URI)[Config.DATABASE_NAME]
         self.db = db
     
     def get_collection(self, collection_name):

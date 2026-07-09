@@ -5,6 +5,7 @@ from datetime import datetime
 import pandas as pd
 
 from config import Config
+from pymongo import MongoClient
 from ml.loaders import load_pipeline
 
 prediction_bp = Blueprint("prediction", __name__)
@@ -28,7 +29,9 @@ def set_health_score_service(service, database=None):
     health_score_service = service
     if database is not None:
         db = database
-        predictions_col = db["predictions"]
+    else:
+        db = MongoClient(Config.MONGO_URI)[Config.DATABASE_NAME]
+    predictions_col = db["predictions"]
 
 
 # =========================

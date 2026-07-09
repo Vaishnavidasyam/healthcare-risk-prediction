@@ -12,6 +12,10 @@ class HealthcareCopilotService(BaseService):
     """
 
     def __init__(self, db):
+        if db is None:
+            from pymongo import MongoClient
+            from config import Config
+            db = MongoClient(Config.MONGO_URI)[Config.DATABASE_NAME]
         super().__init__(db)
         api_key = os.getenv("OPENAI_API_KEY")
         self.base_url = os.getenv("OPENAI_BASE_URL") or self._detect_base_url(api_key)
