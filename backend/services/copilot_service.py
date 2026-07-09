@@ -14,17 +14,17 @@ class HealthcareCopilotService(BaseService):
     def __init__(self, db):
         super().__init__(db)
         api_key = os.getenv("OPENAI_API_KEY")
-        base_url = os.getenv("OPENAI_BASE_URL", "https://api.openai.com/v1")
-        
-        if not api_key:
-            print("Warning: OPENAI_API_KEY is not set.")
-            
-        self.client = OpenAI(api_key=api_key, base_url=base_url) if api_key else None
-        self.preferred_model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-        self.fallback_models = ["gpt-4o", "gpt-4", "gpt-3.5-turbo"]
+        self.base_url = os.getenv("OPENAI_BASE_URL") or self._detect_base_url(api_key)
+        self.preferred_model = os.getenv("OPENAI_MODEL") or self._default_model(self.base_url)
         self.current_model = self.preferred_model
+        self.fallback_models = self._fallback_models(self.base_url)
 
-        # System prompt for medical context
+        if not api_key:
+            print("Warning: OPENAI_API_KEY is not set. Copilot will use offline fallback.")
+            self.client = None
+        else:
+            self.client = OpenAI(api_key=api_key, base_url=self.base_url)
+
         self.system_prompt = (
             "You are SmartMed AI, an advanced Healthcare Intelligence Copilot. "
             "Your goal is to provide highly accurate, empathetic, and data-driven health insights.\n\n"
@@ -43,6 +43,22 @@ class HealthcareCopilotService(BaseService):
             "- If context is missing, ask clarifying questions to provide better insights.\n"
             "- Maintain strict clinical reasoning. Do not speculate beyond established medical knowledge."
         )
+
+    def _detect_base_url(self, api_key):
+        if api_key and api_key.startswith("gsk_"):
+            print("Detected Groq API key, using Groq endpoint")
+            return "https://api.groq.com/openai/v1"
+        return "https://api.openai.com/v1"
+
+    def _default_model(self, base_url):
+        if "groq" in base_url:
+            return "llama-3.3-70b-versatile"
+        return "gpt-4o-mini"
+
+    def _fallback_models(self, base_url):
+        if "groq" in base_url:
+            return ["llama-3.3-70b-versatile", "mixtral-8x7b-32768", "gemma2-9b-it"]
+        return ["gpt-4o", "gpt-4", "gpt-3.5-turbo"]
 
     def start_chat_session(self, user_id):
         """Create a new chat session for a user."""
