@@ -24,7 +24,7 @@ requests==2.31.0
 python-multipart==0.0.6
 
 # PDF & Document Processing
-PyPDF2==4.0.1
+PyPDF2==3.0.1
 pdfplumber==0.10.3
 pytesseract==0.3.10
 Pillow==10.1.0
