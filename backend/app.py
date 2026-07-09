@@ -46,14 +46,26 @@ def create_app(config_name='development'):
     JWTManager(app)
     mongo = PyMongo(app)
     
-    # Global CORS headers - Only one place to set them
+    # Global CORS headers - handle preflight and all requests
     @app.after_request
     def add_cors_headers(response):
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization,X-Requested-With'
+        response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE,OPTIONS,PATCH'
+        response.headers['Access-Control-Max-Age'] = '86400'
         return response
-    
+
+    @app.before_request
+    def handle_preflight():
+        from flask import request, make_response
+        if request.method == 'OPTIONS':
+            response = make_response()
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization,X-Requested-With'
+            response.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE,OPTIONS,PATCH'
+            response.headers['Access-Control-Max-Age'] = '86400'
+            return response, 200
+            
     @app.errorhandler(422)
     def unprocessable_entity(error):
         return jsonify({
