@@ -1,11 +1,10 @@
 Flask
 Flask-Cors
 Flask-JWT-Extended
-pymongo           # if MongoDB
-pymysql           # if MySQL (or use SQLAlchemy)
+pymongo
 bcrypt
-pandas
-numpy
-scikit-learn
+pandas>=2.0
+numpy>=2.0
+scikit-learn>=1.4
 joblib
 python-dotenv
